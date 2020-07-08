@@ -1,0 +1,7 @@
+ .navigation {
+ flex-shrink: 0;
+ }
+
+ .header {
+   margin: 10px;
+ }
