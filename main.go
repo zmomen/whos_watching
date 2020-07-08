@@ -1,32 +1,30 @@
 package main
 
 import (
-	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"whos_watching/controllers"
 	"whos_watching/db"
-	"whos_watching/service"
+
+	"github.com/julienschmidt/httprouter"
 )
+
+func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "Welcome!\n")
+}
 
 func main() {
 	log.Printf("setting up db...")
 	db := &db.Database{}
 	mysql := db.GetDb()
 
-	prefHandler := func(w http.ResponseWriter, r *http.Request) {
-		ups := service.NewUserPrefsService(mysql)
+	prefCtrlr := controllers.NewUserPrefsController(mysql)
+	router := httprouter.New()
 
-		response := ups.GetUserPrefs("Zaid")
-
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		err := json.NewEncoder(w).Encode(response)
-		if err != nil {
-			log.Printf("error encoding json")
-		}
-	}
+	router.GET("/", Index)
+	router.GET("/users/:name/watching", prefCtrlr.GetUserPrefsHandler)
 
 	log.Print("starting server...")
-	http.HandleFunc("/users/watching", prefHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
