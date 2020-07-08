@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS whos_watching; 
+-- DROP DATABASE IF EXISTS whos_watching; 
 
-CREATE DATABASE whos_watching;
-USE whos_watching;
+-- CREATE DATABASE whos_watching;
+-- USE whos_watching;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -9,6 +9,7 @@ CREATE TABLE users (
     name TEXT, 
     PRIMARY KEY(id));
 
+DROP TABLE IF EXISTS media;
  CREATE TABLE media ( 
     id INTEGER NOT NULL AUTO_INCREMENT, 
     title TEXT, 
@@ -16,6 +17,7 @@ CREATE TABLE users (
     release_date DATE,  
     PRIMARY KEY (id)); 
 
+DROP TABLE IF EXISTS user_prefs;
 CREATE TABLE user_prefs (
     id INTEGER NOT NULL AUTO_INCREMENT, 
     user_id INTEGER,
