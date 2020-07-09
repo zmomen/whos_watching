@@ -1,12 +1,18 @@
 import React from "react";
 import "spectre.css";
-import Footer from "./components/common/Footer";
-import Nav from "./components/common/Nav";
+import Footer from "./components/layout/Footer";
+import BannerImage from "./components/layout/BannerImage";
+import { SideMenu } from "./components/menu/SideMenu";
+import { Main } from "./components/Main";
 
 const App = () => {
   return (
     <div className={"container grid-lg"}>
-      <Nav />
+      <BannerImage width="550" height="350" />
+      <div className="d-flex">
+        <SideMenu />
+        <Main />
+      </div>
       <Footer />
     </div>
   );

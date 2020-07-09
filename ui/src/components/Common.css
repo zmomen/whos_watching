@@ -1,0 +1,24 @@
+.banner {
+  margin: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.side-menu {
+  width: 25%;
+}
+
+.menu-element {
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.main-body {
+  margin-left: 20px;
+  width: 100%;
+}

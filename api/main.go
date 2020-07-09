@@ -23,7 +23,7 @@ func main() {
 	router := httprouter.New()
 
 	router.GET("/", Index)
-	router.GET("/users/:name/watching", prefCtrlr.GetUserPrefsHandler)
+	router.GET("/users/:name/items", prefCtrlr.GetUserPrefsHandler)
 
 	log.Print("starting server...")
 	log.Fatal(http.ListenAndServe(":8080", router))
