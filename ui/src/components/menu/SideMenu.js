@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Common.css";
 import soccerImg from "./img_soccer.png";
 import flowerImg from "./img_flower.png";
 import coupleImg from "./img_couple.png";
+import * as api from "../../utils/api";
 
 export const SideMenu = () => {
+  useEffect(() => {
+    api
+      .getAllUsers()
+      .then((response) => console.warn("res", response))
+      .then((contents) => console.log(contents))
+      // .then(({ data }) => {
+        // console.warn("data here", data);
+      // })
+      .catch((err) => {
+        if (err.status !== undefined) {
+          console.warn("500 errro", err);
+        } else {
+          console.warn("network", err);
+        }
+      });
+  });
   return (
     <div className={"side-menu"}>
       <ul className={"menu"}>

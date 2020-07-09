@@ -3,6 +3,7 @@ package service
 import (
 	"database/sql"
 	"log"
+	models "whos_watching/models"
 )
 
 const (
@@ -20,7 +21,7 @@ func NewUserPrefsService(db *sql.DB) *UserPrefsService {
 	return &UserPrefsService{database: db}
 }
 
-func (u *UserPrefsService) GetUserPrefs(userId string) []UserPrefsModel {
+func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 
 	res, err := u.database.Query(SelectUserPrefs, userId)
 
@@ -28,8 +29,8 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []UserPrefsModel {
 		log.Panic(err.Error())
 	}
 
-	var pref UserPrefsModel
-	var prefArry []UserPrefsModel
+	var pref models.UserPrefsModel
+	var prefArry []models.UserPrefsModel
 
 	for res.Next() {
 		err = res.Scan(&pref.Name, &pref.Title, &pref.MediaType, &pref.Status)

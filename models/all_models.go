@@ -6,3 +6,7 @@ type UserPrefsModel struct {
 	MediaType string `json:"media"`
 	Status    string `json:"status"`
 }
+
+type User struct {
+	Name string `json:"name"`
+}

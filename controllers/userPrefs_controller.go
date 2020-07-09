@@ -5,9 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"whos_watching/service"
-
-	"github.com/julienschmidt/httprouter"
+	services "whos_watching/services"
 )
 
 type UserPrefsController struct {
@@ -20,12 +18,11 @@ func NewUserPrefsController(db *sql.DB) *UserPrefsController {
 	}
 }
 
-func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	ups := service.NewUserPrefsService(c.db)
+func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http.Request) {
+	ups := services.NewUserPrefsService(c.db)
 
-	response := ups.GetUserPrefs(ps.ByName("name"))
+	response := ups.GetUserPrefs("test")
 
-	w.Header().Set("Content-Type", "application/json")
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusOK)
 	err := json.NewEncoder(w).Encode(response)
