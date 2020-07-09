@@ -1,56 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Common.css";
-import soccerImg from "./img_soccer.png";
-import flowerImg from "./img_flower.png";
-import coupleImg from "./img_couple.png";
 import * as api from "../../utils/api";
 
 export const SideMenu = () => {
+  const [users, setUsers] = useState([]);
   useEffect(() => {
     api
       .getAllUsers()
-      .then((response) => console.warn("res", response))
-      .then((contents) => console.log(contents))
-      // .then(({ data }) => {
-        // console.warn("data here", data);
-      // })
+      .then(({ data }) => {
+        setUsers(data);
+        console.warn("res", data);
+      })
       .catch((err) => {
         if (err.status !== undefined) {
-          console.warn("500 errro", err);
+          console.warn("API error!", err);
         } else {
           console.warn("network", err);
         }
       });
-  });
+  }, []);
   return (
     <div className={"side-menu"}>
       <ul className={"menu"}>
         <li>What's Playing</li>
-        <li className={"divider"}></li>
-        <li className={"menu-item"}>
-          <a href="/#">
-            <figure className="avatar avatar-sm bg-white">
-              <img src={coupleImg} alt="couple_img" />
-            </figure>
-            &nbsp;&nbsp;For Both
-          </a>
-        </li>
-        <li className={"menu-item"}>
-          <a href="/#">
-            <figure className="avatar avatar-sm bg-white">
-              <img src={soccerImg} alt="soccer_img" />
-            </figure>
-            &nbsp;&nbsp;Zaid
-          </a>
-        </li>
-        <li className={"menu-item"}>
-          <a href="/#">
-            <figure className="avatar avatar-sm bg-white">
-              <img src={flowerImg} alt="flower_img" />
-            </figure>
-            &nbsp;&nbsp;Kristen
-          </a>
-        </li>
+        <li className={"divider"} />
+        {users.map((user) => {
+          return (
+            <li className={"menu-item"}>
+              <a href="/#">
+                <figure className="avatar avatar-sm bg-white">
+                  <img src={user.profileUrl} alt="couple_img" />
+                </figure>
+                &nbsp;{user.name}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

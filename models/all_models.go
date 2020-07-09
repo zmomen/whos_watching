@@ -8,5 +8,6 @@ type UserPrefsModel struct {
 }
 
 type User struct {
-	Name string `json:"name"`
+	Name       string `json:"name"`
+	ProfileUrl string `json:"profileUrl"`
 }

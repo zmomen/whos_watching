@@ -9,6 +9,11 @@ CREATE TABLE users (
     name TEXT, 
     PRIMARY KEY(id));
 
+ALTER TABLE
+  whos_watching.users
+ADD
+  COLUMN profile_url TEXT;
+
 DROP TABLE IF EXISTS media;
  CREATE TABLE media ( 
     id INTEGER NOT NULL AUTO_INCREMENT, 
