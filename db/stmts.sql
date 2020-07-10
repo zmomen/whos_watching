@@ -37,3 +37,10 @@ CREATE TABLE user_prefs (
   CONSTRAINT fk_media FOREIGN KEY (media_id) REFERENCES media(id),
   CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+ALTER TABLE
+  whos_watching.user_prefs
+ADD
+  COLUMN notes TEXT;
+
+
