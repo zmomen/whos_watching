@@ -7,7 +7,8 @@ import (
 )
 
 const (
-	SelectUsers = "SELECT name, profile_url from users "
+	SelectUsers    = "SELECT id, name, profile_url from users "
+	SelectUserById = "SELECT id, name, profile_url from users where id = ?"
 )
 
 type UserService struct {
@@ -30,11 +31,30 @@ func (u *UserService) GetUsers() []models.User {
 	var userArray []models.User
 
 	for res.Next() {
-		err = res.Scan(&user.Name, &user.ProfileUrl)
+		err = res.Scan(&user.ID, &user.Name, &user.ProfileUrl)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}
 		userArray = append(userArray, user)
 	}
 	return userArray
+}
+
+func (u *UserService) GetUserById(userId string) models.User {
+
+	res, err := u.database.Query(SelectUserById, userId)
+
+	if err != nil {
+		log.Panicln("db error!", err.Error())
+	}
+
+	var user models.User
+
+	for res.Next() {
+		err = res.Scan(&user.ID, &user.Name, &user.ProfileUrl)
+		if err != nil {
+			log.Panic(err.Error()) // proper error handling instead of panic in your app
+		}
+	}
+	return user
 }

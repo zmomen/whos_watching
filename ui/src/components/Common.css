@@ -22,3 +22,7 @@
   margin-left: 20px;
   width: 100%;
 }
+
+.selected-user {
+  background-color: aqua;
+}

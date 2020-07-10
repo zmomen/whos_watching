@@ -25,7 +25,7 @@ function Footer() {
     <>
       <HorizontalDiv color="#4c4c4e">
         <span role="img" aria-label="muscle" style={{ color: "white" }}>
-          Created By Zaid Al-Momen © 2020 💪🏼
+          Created By zmomen © 2020 💪🏼
         </span>
       </HorizontalDiv>
     </>

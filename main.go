@@ -37,6 +37,7 @@ func main() {
 
 	router.HandleFunc("/", IndexHandler).Methods("GET")
 	router.HandleFunc("/users", userCtrlr.GetUsersHandler).Methods("GET")
+	router.HandleFunc("/users/{id}", userCtrlr.GetUserHandler).Methods("GET")
 
 	//cors optionsGoes Below
 	corsOpts := cors.New(cors.Options{
