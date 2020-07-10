@@ -4,7 +4,7 @@ import { Context } from "../utils/Store";
 import * as api from "../utils/api";
 
 export const Main = () => {
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
   const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
     api
