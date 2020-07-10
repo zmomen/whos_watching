@@ -19,7 +19,6 @@ function Banner(props) {
       interval={4000}
       autoPlay={true}
       stopOnHover={true}
-      emulateTouch={true}
       infiniteLoop={true}
       showArrows={true}
       showThumbs={false}
@@ -27,17 +26,12 @@ function Banner(props) {
     >
       {media.map((m, idx) => {
         return (
-          <div>
+          <div key={idx}>
             <img height={props.height} src={m.mediaUrl} alt={m.title} />
             <p className="legend">{m.title}</p>
           </div>
         );
       })}
-
-      <div>
-        <img height={props.height} src="/images/banner.jpg" alt="main_image2" />
-        <p className="legend">Banner</p>
-      </div>
     </Carousel>
   );
 }

@@ -10,7 +10,7 @@ const (
 	InsertMedia = "INSERT INTO media (title, media_type, genre) VALUES " +
 		"(?, ?, ?) "
 
-	SelectMedia = "SELECT title, media_type, genre FROM media "
+	SelectMedia = "SELECT title, media_type, genre, COALESCE(media_url, '') as media_url FROM media ORDER BY RAND() "
 )
 
 type MediaService struct {
@@ -32,7 +32,7 @@ func (m *MediaService) GetAllMedia() []models.MediaModel {
 	var mediaArry = make([]models.MediaModel, 0)
 
 	for res.Next() {
-		err = res.Scan(&media.Title, &media.MediaType, &media.Genre)
+		err = res.Scan(&media.Title, &media.MediaType, &media.Genre, &media.MediaUrl)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}

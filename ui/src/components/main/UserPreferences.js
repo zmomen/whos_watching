@@ -40,7 +40,22 @@ export const UserPreferences = () => {
     <div className="main-body">
       <ul className={"menu"}>
         <li>
-          Currently Playing for <b>{userInfo && userInfo.name}</b>
+          <div
+            className="d-flex"
+            style={{ justifyContent: "space-between", alignItems: "center" }}
+          >
+            <div>
+              Currently Playing for <b>{userInfo && userInfo.name}</b>
+            </div>
+            <button
+              className="btn"
+              onClick={() => setIsAdding((prevState) => !prevState)}
+            >
+              <i
+                className={`icon ${isAdding ? "icon-minus" : "icon-plus"}`}
+              ></i>
+            </button>
+          </div>
         </li>
         <li className={"divider"}></li>
         <li>
@@ -50,18 +65,6 @@ export const UserPreferences = () => {
                 <th>Title</th>
                 <th>Type</th>
                 <th>Genre</th>
-                <th>
-                  <button
-                    className="btn"
-                    onClick={() => setIsAdding((prevState) => !prevState)}
-                  >
-                    <i
-                      className={`icon ${
-                        isAdding ? "icon-minus" : "icon-plus"
-                      }`}
-                    ></i>
-                  </button>
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -94,8 +97,10 @@ const AddRow = ({ handleSubmit }) => {
     mediaUrl: "",
   };
   const [rowData, setRowData] = useState(initialState);
+  const [errors, setErrors] = useState(false);
 
   const handleChange = (evt) => {
+    setErrors(false);
     const value = evt.target.value;
     setRowData({
       ...rowData,
@@ -103,60 +108,93 @@ const AddRow = ({ handleSubmit }) => {
     });
   };
 
+  const isDataValid = () => {
+    return (
+      rowData.title !== "" &&
+      rowData.genre !== "" &&
+      rowData.media !== "" &&
+      rowData.mediaUrl !== ""
+    );
+  };
+
   return (
-    <form>
-      <table className="add-row table">
-        <tbody>
-          <tr>
-            <td>
-              <label>
-                Title
+    <div className="add-row">
+      <form>
+        <table className="table">
+          <tbody>
+            <tr>
+              <td>
+                <label>
+                  Title
+                  <br />
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={rowData.title}
+                  onChange={handleChange}
+                ></input>
+              </td>
+              <td>
+                <label>
+                  Type
+                  <br />
+                </label>
+                <input
+                  type="text"
+                  name="media"
+                  value={rowData.media}
+                  onChange={handleChange}
+                ></input>
+              </td>
+              <td>
+                <label>
+                  Genre
+                  <br />
+                </label>
+                <input
+                  type="text"
+                  name="genre"
+                  value={rowData.genre}
+                  onChange={handleChange}
+                ></input>
+              </td>
+              <td>
                 <br />
-              </label>
-              <input type="text" name="title" value={rowData.title} onChange={handleChange}></input>
-            </td>
-            <td>
-              <label>
-                Type
-                <br />
-              </label>
-              <input type="text" name="media" value={rowData.media} onChange={handleChange}></input>
-            </td>
-            <td>
-              <label>
-                Genre
-                <br />
-              </label>
-              <input type="text" name="genre" value={rowData.genre} onChange={handleChange}></input>
-            </td>
-            <td>
-              <br />
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  handleSubmit(e, rowData);
-                  setRowData(initialState);
-                }}
-              >
-                Add
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                Media Url
-                <br />
-              </label>
-              <input
-                type="text"
-                name="mediaUrl"
-                onChange={handleChange}
-              ></input>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+                <button
+                  className="btn btn-success"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (isDataValid()) {
+                      handleSubmit(e, rowData);
+                      setRowData(initialState);
+                    } else {
+                      setErrors(true);
+                    }
+                  }}
+                >
+                  Add
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>
+                  Media Url
+                  <br />
+                </label>
+                <input
+                  type="text"
+                  name="mediaUrl"
+                  value={rowData.mediaUrl}
+                  onChange={handleChange}
+                ></input>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      {errors && <div style={{ color: "red" }}>Error: invalid data</div>}
+    </div>
   );
 };

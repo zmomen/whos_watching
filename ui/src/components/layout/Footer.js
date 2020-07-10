@@ -2,9 +2,8 @@ import React from "react";
 
 function HorizontalDiv(props) {
   var style = {
-    borderRadius: "10px",
+    borderRadius: "0.1rem",
     backgroundColor: `${props.color}`,
-    borderTop: "1px solid #E7E7E7",
     textAlign: "right",
     padding: "20px",
     marginTop: "20px",
