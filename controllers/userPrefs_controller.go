@@ -6,22 +6,25 @@ import (
 	"log"
 	"net/http"
 	services "whos_watching/services"
+
+	"github.com/gorilla/mux"
 )
 
 type UserPrefsController struct {
-	db *sql.DB
+	ups *services.UserPrefsService
+	db  *sql.DB
 }
 
 func NewUserPrefsController(db *sql.DB) *UserPrefsController {
 	return &UserPrefsController{
-		db: db,
+		ups: services.NewUserPrefsService(db),
+		db:  db,
 	}
 }
 
 func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http.Request) {
-	ups := services.NewUserPrefsService(c.db)
-
-	response := ups.GetUserPrefs("test")
+	vars := mux.Vars(r)
+	response := c.ups.GetUserPrefs(vars["id"])
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusOK)

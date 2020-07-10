@@ -1,9 +1,10 @@
 package service
 
 type UserPrefsModel struct {
-	Name      string `json:"name"`
+	ID        int    `json:"id"`
 	Title     string `json:"title"`
 	MediaType string `json:"media"`
+	Genre     string `json:"genre"`
 	Status    string `json:"status"`
 }
 

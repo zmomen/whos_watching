@@ -30,7 +30,7 @@ func main() {
 	db := &db.Database{}
 	mysql := db.GetDb()
 
-	// prefCtrlr := controllers.NewUserPrefsController(mysql)
+	prefCtrlr := controllers.NewUserPrefsController(mysql)
 	userCtrlr := controllers.NewUserController(mysql)
 
 	router := mux.NewRouter()
@@ -38,6 +38,7 @@ func main() {
 	router.HandleFunc("/", IndexHandler).Methods("GET")
 	router.HandleFunc("/users", userCtrlr.GetUsersHandler).Methods("GET")
 	router.HandleFunc("/users/{id}", userCtrlr.GetUserHandler).Methods("GET")
+	router.HandleFunc("/users/{id}/preferences", prefCtrlr.GetUserPrefsHandler).Methods("GET")
 
 	//cors optionsGoes Below
 	corsOpts := cors.New(cors.Options{
@@ -53,9 +54,6 @@ func main() {
 		},
 		AllowedHeaders: []string{"*"},
 	})
-
-	// router.GET("/users/:name/items", prefCtrlr.GetUserPrefsHandler)
-	// router.OPTIONS("/users/:name/items", prefCtrlr.GetUserPrefsHandler)
 
 	log.Print("starting server...")
 	log.Fatal(http.ListenAndServe(":8080", corsOpts.Handler(router)))

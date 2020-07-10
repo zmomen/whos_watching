@@ -3,7 +3,7 @@ import "spectre.css";
 import Footer from "./components/layout/Footer";
 import Banner from "./components/layout/Banner";
 import { SideMenu } from "./components/menu/SideMenu";
-import { Main } from "./components/Main";
+import { Main } from "./components/main/UserPreferences";
 import Store from "./utils/Store";
 
 const App = () => {

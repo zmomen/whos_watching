@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Common.css";
-import { Context } from "../utils/Store";
-import * as api from "../utils/api";
+import "../Common.css";
+import { Context } from "../../utils/Store";
+import * as api from "../../utils/api";
 
 export const Main = () => {
   const [state] = useContext(Context);

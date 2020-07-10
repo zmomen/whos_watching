@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	SelectUserPrefs = "SELECT u.name, m.title, m.media_type, up.status " +
+	SelectUserPrefs = "SELECT u.id, m.title, m.media_type, m.genre, up.status " +
 		"from users u " +
 		"inner join user_prefs up on u.id = up.user_id " +
-		"inner join media m on m.id = up.media_id where u.name = ?"
+		"inner join media m on m.id = up.media_id where u.id = ?"
 )
 
 type UserPrefsService struct {
@@ -33,7 +33,7 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 	var prefArry []models.UserPrefsModel
 
 	for res.Next() {
-		err = res.Scan(&pref.Name, &pref.Title, &pref.MediaType, &pref.Status)
+		err = res.Scan(&pref.ID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}
