@@ -194,7 +194,7 @@ const AddRow = ({ handleSubmit }) => {
           </tbody>
         </table>
       </form>
-      {errors && <div style={{ color: "red" }}>Error: invalid data</div>}
+      {errors && <div style={{ color: "red" }}>Error: missing data</div>}
     </div>
   );
 };

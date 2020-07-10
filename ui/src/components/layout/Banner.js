@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Common.css";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import { getAllMedia } from "../../utils/api";
 
 function Banner(props) {
@@ -14,25 +14,40 @@ function Banner(props) {
       })
       .catch((err) => console.warn("error", err));
   }, []);
+
+  const properties = {
+    duration: 4000,
+    transitionDuration: 1000,
+    infinite: true,
+    indicators: true,
+    arrows: true,
+    pauseOnHover: true,
+  };
+
   return (
-    <Carousel
-      interval={4000}
-      autoPlay={true}
-      stopOnHover={true}
-      infiniteLoop={true}
-      showArrows={true}
-      showThumbs={false}
-      dynamicHeight={false}
-    >
-      {media.map((m, idx) => {
-        return (
-          <div key={idx}>
-            <img height={props.height} src={m.mediaUrl} alt={m.title} />
-            <p className="legend">{m.title}</p>
-          </div>
-        );
-      })}
-    </Carousel>
+    <div className="slide-container" style={{ height: "450px" }}>
+      <Slide {...properties}>
+        {media.map((m, idx) => {
+          return (
+            <div
+              key={idx}
+              style={{
+                paddingTop: "10px",
+                paddingLeft: "30px",
+              }}
+            >
+              <img
+                height="400"
+                width="900"
+                key={idx}
+                src={m.mediaUrl}
+                alt={m.title}
+              />
+            </div>
+          );
+        })}
+      </Slide>
+    </div>
   );
 }
 
