@@ -3,7 +3,7 @@ import "spectre.css";
 import Footer from "./components/layout/Footer";
 import Banner from "./components/layout/Banner";
 import { SideMenu } from "./components/menu/SideMenu";
-import { Main } from "./components/main/UserPreferences";
+import { UserPreferences } from "./components/main/UserPreferences";
 import Store from "./utils/Store";
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
         <Banner height="400"/>
         <div className="d-flex mt-2">
           <SideMenu />
-          <Main />
+          <UserPreferences />
         </div>
         <Footer />
       </div>

@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Common.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { getAllMedia } from "../../utils/api";
 
 function Banner(props) {
+  const [media, setMedia] = useState([]);
+
+  useEffect(() => {
+    getAllMedia()
+      .then(({ data }) => {
+        setMedia(data);
+      })
+      .catch((err) => console.warn("error", err));
+  }, []);
   return (
     <Carousel
-      interval={5000}
+      interval={4000}
       autoPlay={true}
       stopOnHover={true}
       emulateTouch={true}
@@ -15,25 +25,18 @@ function Banner(props) {
       showThumbs={false}
       dynamicHeight={false}
     >
-      <div>
-        <img
-          height={props.height}
-          src="/images/img_soccer.png"
-          alt="main_image1"
-        />
-        <p className="legend">Legend 1</p>
-      </div>
+      {media.map((m, idx) => {
+        return (
+          <div>
+            <img height={props.height} src={m.mediaUrl} alt={m.title} />
+            <p className="legend">{m.title}</p>
+          </div>
+        );
+      })}
+
       <div>
         <img height={props.height} src="/images/banner.jpg" alt="main_image2" />
         <p className="legend">Banner</p>
-      </div>
-      <div>
-        <img
-          height={props.height}
-          src="http://lorempixel.com/output/cats-q-c-640-480-3.jpg"
-          alt="main_image3"
-        />
-        <p className="legend">Legend 3</p>
       </div>
     </Carousel>
   );

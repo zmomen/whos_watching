@@ -23,6 +23,11 @@ DROP TABLE IF EXISTS media;
     genre TEXT,  
     PRIMARY KEY (id)); 
 
+ALTER TABLE
+  whos_watching.media
+ADD
+  COLUMN media_url TEXT;
+
 CREATE TABLE user_prefs (
   id INTEGER NOT NULL AUTO_INCREMENT,
   user_id INTEGER,

@@ -19,7 +19,7 @@ func NewUserService(db *sql.DB) *UserService {
 	return &UserService{database: db}
 }
 
-func (u *UserService) GetUsers() []models.User {
+func (u *UserService) GetUsers() []models.UserModel {
 
 	res, err := u.database.Query(SelectUsers)
 
@@ -27,8 +27,8 @@ func (u *UserService) GetUsers() []models.User {
 		log.Panic(err.Error())
 	}
 
-	var user models.User
-	var userArray []models.User
+	var user models.UserModel
+	var userArray []models.UserModel
 
 	for res.Next() {
 		err = res.Scan(&user.ID, &user.Name, &user.ProfileUrl)
@@ -40,7 +40,7 @@ func (u *UserService) GetUsers() []models.User {
 	return userArray
 }
 
-func (u *UserService) GetUserById(userId string) models.User {
+func (u *UserService) GetUserById(userId string) models.UserModel {
 
 	res, err := u.database.Query(SelectUserById, userId)
 
@@ -48,7 +48,7 @@ func (u *UserService) GetUserById(userId string) models.User {
 		log.Panicln("db error!", err.Error())
 	}
 
-	var user models.User
+	var user models.UserModel
 
 	for res.Next() {
 		err = res.Scan(&user.ID, &user.Name, &user.ProfileUrl)

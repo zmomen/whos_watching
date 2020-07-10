@@ -12,23 +12,16 @@ export const SideMenu = () => {
       .then(({ data }) => {
         setUsers(data);
       })
-      .catch((err) => {
-        if (err.status !== undefined) {
-          console.warn("API error!", err);
-        } else {
-          console.warn("network", err);
-        }
-      });
+      .catch((err) => console.warn("error", err));
   }, []);
 
-  console.warn("stat", state);
   const changeSelected = (id) => {
     dispatch({ type: "SET_GLOBAL_USER", payload: id });
   };
   return (
     <div className={"side-menu"}>
       <ul className={"menu"}>
-        <li>What's Playing</li>
+        <li>Who's Watching</li>
         <li className={"divider"} />
         {users.map((user, idx) => {
           return (

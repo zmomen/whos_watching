@@ -4,7 +4,6 @@ var config = {
   headers: { "Access-Control-Allow-Origin": "*" },
 };
 
-
 var instance = axios.create({
   baseURL: "http://" + process.env.REACT_APP_IPP + ":8080",
 });
@@ -19,4 +18,12 @@ export function getUserByID(id) {
 
 export function getUserPrefs(id) {
   return instance.get(`/users/${id}/preferences`, config);
+}
+
+export function addUserPref(id, row) {
+  return instance.post(`/users/${id}/preferences`, row, config);
+}
+
+export function getAllMedia() {
+  return instance.get(`/media`, config);
 }
