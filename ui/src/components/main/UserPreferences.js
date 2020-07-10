@@ -87,12 +87,13 @@ export const UserPreferences = () => {
 };
 
 const AddRow = ({ handleSubmit }) => {
-  const [rowData, setRowData] = useState({
+  const initialState = {
     title: "",
     media: "",
     genre: "",
     mediaUrl: "",
-  });
+  };
+  const [rowData, setRowData] = useState(initialState);
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -104,25 +105,38 @@ const AddRow = ({ handleSubmit }) => {
 
   return (
     <form>
-      <table className="table">
+      <table className="add-row table">
         <tbody>
           <tr>
             <td>
-              <label>Title</label>
-              <input type="text" name="title" onChange={handleChange}></input>
+              <label>
+                Title
+                <br />
+              </label>
+              <input type="text" name="title" value={rowData.title} onChange={handleChange}></input>
             </td>
             <td>
-              <label>Type</label>
-              <input type="text" name="media" onChange={handleChange}></input>
+              <label>
+                Type
+                <br />
+              </label>
+              <input type="text" name="media" value={rowData.media} onChange={handleChange}></input>
             </td>
             <td>
-              <label>Genre</label>
-              <input type="text" name="genre" onChange={handleChange}></input>
+              <label>
+                Genre
+                <br />
+              </label>
+              <input type="text" name="genre" value={rowData.genre} onChange={handleChange}></input>
             </td>
             <td>
+              <br />
               <button
                 className="btn btn-success"
-                onClick={(e) => handleSubmit(e, rowData)}
+                onClick={(e) => {
+                  handleSubmit(e, rowData);
+                  setRowData(initialState);
+                }}
               >
                 Add
               </button>
@@ -130,7 +144,10 @@ const AddRow = ({ handleSubmit }) => {
           </tr>
           <tr>
             <td>
-              <label>Media Url</label>
+              <label>
+                Media Url
+                <br />
+              </label>
               <input
                 type="text"
                 name="mediaUrl"

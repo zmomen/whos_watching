@@ -26,3 +26,7 @@
 .selected-user {
   background-color: aqua;
 }
+
+.add-row {
+  font-family: "Lucida Console", Courier, monospace;
+}
