@@ -10,8 +10,8 @@ const App = () => {
   return (
     <Store>
       <div className={"container grid-lg"}>
-        <Banner />
-        <div className="d-flex">
+        <Banner height="400"/>
+        <div className="d-flex mt-2">
           <SideMenu />
           <Main />
         </div>

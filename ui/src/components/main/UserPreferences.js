@@ -5,12 +5,13 @@ import * as api from "../../utils/api";
 
 export const Main = () => {
   const [state] = useContext(Context);
-  const [currentUser, setCurrentUser] = useState({});
+  const [userPrefs, setUserPrefs] = useState([]);
   useEffect(() => {
+    // get user preferences.
     api
-      .getUserByID(state.userId)
+      .getUserPrefs(state.userId)
       .then(({ data }) => {
-        setCurrentUser(data);
+        setUserPrefs(data);
       })
       .catch((err) => {
         if (err.status !== undefined) {
@@ -23,8 +24,35 @@ export const Main = () => {
   return (
     <div className="main-body">
       <ul className={"menu"}>
-        <li>Currently Playing for {currentUser && currentUser.name}</li>
+        <li>
+          Currently Playing for <b>{state.userId}</b>
+        </li>
         <li className={"divider"}></li>
+        <li>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Genre</th>
+              </tr>
+            </thead>
+            <tbody>
+              {userPrefs.map((u, idx) => {
+                return (
+                  <tr
+                    key={idx}
+                    className={`${(idx + 1) % 2 === 0 ? "active" : ""}`}
+                  >
+                    <td>{u.title}</td>
+                    <td>{u.media}</td>
+                    <td>{u.genre}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </li>
       </ul>
     </div>
   );

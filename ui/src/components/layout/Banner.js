@@ -6,27 +6,30 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 function Banner(props) {
   return (
     <Carousel
+      interval={5000}
       autoPlay={true}
-      stopOnHover
-      emulateTouch
+      stopOnHover={true}
+      emulateTouch={true}
       infiniteLoop={true}
       showArrows={true}
       showThumbs={false}
-      dynamicHeight={true}
+      dynamicHeight={false}
     >
       <div>
-        <img src="/images/img_soccer.png" alt="main_image1" />
+        <img
+          height={props.height}
+          src="/images/img_soccer.png"
+          alt="main_image1"
+        />
         <p className="legend">Legend 1</p>
       </div>
       <div>
-        <img
-          src="/images/banner.jpg"
-          alt="main_image2"
-        />
+        <img height={props.height} src="/images/banner.jpg" alt="main_image2" />
         <p className="legend">Banner</p>
       </div>
       <div>
         <img
+          height={props.height}
           src="http://lorempixel.com/output/cats-q-c-640-480-3.jpg"
           alt="main_image3"
         />

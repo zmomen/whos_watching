@@ -30,7 +30,7 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 	}
 
 	var pref models.UserPrefsModel
-	var prefArry []models.UserPrefsModel
+	var prefArry = make([]models.UserPrefsModel, 0)
 
 	for res.Next() {
 		err = res.Scan(&pref.ID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status)
