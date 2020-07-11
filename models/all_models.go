@@ -6,6 +6,7 @@ type UserPrefsModel struct {
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
 	Status    string `json:"status"`
+	Notes     string `json:"notes"`
 }
 
 type UserModel struct {
@@ -19,4 +20,5 @@ type MediaModel struct {
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
+	Notes     string `json:"notes"`
 }

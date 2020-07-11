@@ -30,3 +30,7 @@
 .add-row {
   font-family: "Lucida Console", Courier, monospace;
 }
+
+.update-btn {
+  padding-left: 5rem;
+}

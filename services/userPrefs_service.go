@@ -7,12 +7,13 @@ import (
 )
 
 const (
-	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, up.status " +
+	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes " +
 		"from users u " +
 		"inner join user_prefs up on u.id = up.user_id " +
 		"inner join media m on m.id = up.media_id where u.id = ?"
-	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status) " +
-		"VALUES (?, ?, ?) "
+		
+	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes) " +
+		"VALUES (?, ?, ?, ?) "
 
 	NewStatus = "Active"
 )
@@ -37,7 +38,7 @@ func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) 
 
 	if newMediaId != -1 {
 		log.Println("Adding user pref...")
-		res, err := u.database.Exec(InsertUserPref, userId, newMediaId, NewStatus)
+		res, err := u.database.Exec(InsertUserPref, userId, newMediaId, NewStatus, medium.Notes)
 		if err != nil {
 			log.Panic(err.Error())
 			return model
@@ -48,6 +49,7 @@ func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) 
 			Title:     medium.Title,
 			MediaType: medium.MediaType,
 			Genre:     medium.Genre,
+			Notes:     medium.Notes,
 			Status:    "Active",
 		}
 		log.Println("User pref added!")
@@ -70,7 +72,7 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 	var prefArry = make([]models.UserPrefsModel, 0)
 
 	for res.Next() {
-		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status)
+		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}

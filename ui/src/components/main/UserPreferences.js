@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "../Common.css";
 import { Context } from "../../utils/Store";
 import * as api from "../../utils/api";
+import { AddRow } from "./AddRow";
+import Popup from "reactjs-popup";
 
 export const UserPreferences = () => {
   const [state] = useContext(Context);
@@ -65,6 +67,8 @@ export const UserPreferences = () => {
                 <th>Title</th>
                 <th>Type</th>
                 <th>Genre</th>
+                <th>Notes</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -77,6 +81,10 @@ export const UserPreferences = () => {
                     <td>{u.title}</td>
                     <td>{u.media}</td>
                     <td>{u.genre}</td>
+                    <td>{u.notes}</td>
+                    <td>
+                      <UpdateModal data={u} />
+                    </td>
                   </tr>
                 );
               })}
@@ -89,112 +97,36 @@ export const UserPreferences = () => {
   );
 };
 
-const AddRow = ({ handleSubmit }) => {
-  const initialState = {
-    title: "",
-    media: "",
-    genre: "",
-    mediaUrl: "",
-  };
-  const [rowData, setRowData] = useState(initialState);
-  const [errors, setErrors] = useState(false);
-
-  const handleChange = (evt) => {
-    setErrors(false);
-    const value = evt.target.value;
-    setRowData({
-      ...rowData,
-      [evt.target.name]: value,
-    });
-  };
-
-  const isDataValid = () => {
-    return (
-      rowData.title !== "" &&
-      rowData.genre !== "" &&
-      rowData.media !== "" &&
-      rowData.mediaUrl !== ""
-    );
-  };
-
-  return (
-    <div className="add-row">
-      <form>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td>
-                <label>
-                  Title
-                  <br />
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={rowData.title}
-                  onChange={handleChange}
-                ></input>
-              </td>
-              <td>
-                <label>
-                  Type
-                  <br />
-                </label>
-                <input
-                  type="text"
-                  name="media"
-                  value={rowData.media}
-                  onChange={handleChange}
-                ></input>
-              </td>
-              <td>
-                <label>
-                  Genre
-                  <br />
-                </label>
-                <input
-                  type="text"
-                  name="genre"
-                  value={rowData.genre}
-                  onChange={handleChange}
-                ></input>
-              </td>
-              <td>
-                <br />
-                <button
-                  className="btn btn-success"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (isDataValid()) {
-                      handleSubmit(e, rowData);
-                      setRowData(initialState);
-                    } else {
-                      setErrors(true);
-                    }
-                  }}
-                >
-                  Add
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>
-                  Media Url
-                  <br />
-                </label>
-                <input
-                  type="text"
-                  name="mediaUrl"
-                  value={rowData.mediaUrl}
-                  onChange={handleChange}
-                ></input>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-      {errors && <div style={{ color: "red" }}>Error: missing data</div>}
+const UpdateModal = ({ data }) => (
+  <Popup
+    trigger={<button className="btn"> Edit </button>}
+    modal
+    closeOnDocumentClick
+  >
+    <div>
+      <div>
+        <ul>
+          <li>Title</li>
+          <input value={data.title} />
+          <li>Media Type</li>
+          <input value={data.media} />
+          <li>Genre</li>
+          <input value={data.genre} />
+          <li>Notes</li>
+          <input value={data.notes} />
+        </ul>
+      </div>
+      <div className="update-btn">
+        <button
+          className="btn btn-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            // updateRow(e, rowData);
+          }}
+        >
+          Update
+        </button>
+      </div>
     </div>
-  );
-};
+  </Popup>
+);

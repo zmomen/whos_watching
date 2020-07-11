@@ -17,7 +17,7 @@ function Banner(props) {
 
   const properties = {
     duration: 4000,
-    transitionDuration: 1000,
+    transitionDuration: 500,
     infinite: true,
     indicators: true,
     arrows: true,

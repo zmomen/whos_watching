@@ -6,7 +6,7 @@ function HorizontalDiv(props) {
     backgroundColor: `${props.color}`,
     textAlign: "right",
     padding: "20px",
-    marginTop: "20px",
+    marginTop: "200px",
     left: "0",
     bottom: "0",
     height: "60px",
