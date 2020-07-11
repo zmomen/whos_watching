@@ -20,14 +20,8 @@ export const AddRow = ({ handleSubmit }) => {
     });
   };
 
-  const isDataValid = () => {
-    return (
-      rowData.title !== "" &&
-      rowData.genre !== "" &&
-      rowData.media !== "" &&
-      rowData.mediaUrl !== "" &&
-      rowData.notes !== ""
-    );
+  const isDataValid = (data) => {
+    return Object.values(data).every((e) => e !== "");
   };
 
   return (
@@ -77,8 +71,8 @@ export const AddRow = ({ handleSubmit }) => {
                 className="btn btn-success"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (isDataValid()) {
-                    handleSubmit(e, rowData);
+                  if (isDataValid(rowData)) {
+                    handleSubmit(rowData);
                     setRowData(initialState);
                   } else {
                     setErrors(true);

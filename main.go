@@ -40,6 +40,7 @@ func main() {
 	router.HandleFunc("/users", userCtrlr.GetUsersHandler).Methods("GET")
 	router.HandleFunc("/users/{id}", userCtrlr.GetUserHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.GetUserPrefsHandler).Methods("GET")
+	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.GetUserPrefHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.CreateUserPrefHandler).Methods("POST")
 	router.HandleFunc("/media", mediaCtrlr.GetAllMediaHandler).Methods("GET")
 

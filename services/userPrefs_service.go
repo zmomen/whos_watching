@@ -11,7 +11,12 @@ const (
 		"from users u " +
 		"inner join user_prefs up on u.id = up.user_id " +
 		"inner join media m on m.id = up.media_id where u.id = ?"
-		
+
+	SelectUserPreference = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes " +
+		"from users u " +
+		"inner join user_prefs up on u.id = up.user_id " +
+		"inner join media m on m.id = up.media_id where u.id = ? and up.id = ?"
+
 	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes) " +
 		"VALUES (?, ?, ?, ?) "
 
@@ -79,4 +84,23 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 		prefArry = append(prefArry, pref)
 	}
 	return prefArry
+}
+
+func (u *UserPrefsService) GetUserPreference(userId string, prefId string) models.UserPrefsModel {
+
+	res, err := u.database.Query(SelectUserPreference, userId, prefId)
+
+	if err != nil {
+		log.Panic(err.Error())
+	}
+
+	var pref models.UserPrefsModel
+
+	for res.Next() {
+		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes)
+		if err != nil {
+			log.Panic(err.Error()) // proper error handling instead of panic in your app
+		}
+	}
+	return pref
 }
