@@ -24,6 +24,10 @@ export function addUserPref(id, row) {
   return instance.post(`/users/${id}/preferences`, row, config);
 }
 
+export function updateUserPref(id, row) {
+  return instance.put(`/users/${id}/preferences/${row.id}`, row, config);
+}
+
 export function getAllMedia() {
   return instance.get(`/media`, config);
 }

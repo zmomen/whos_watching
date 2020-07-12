@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
-import "../Common.css";
+import React, { useContext, useEffect, useState } from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { getAllMedia } from "../../utils/api";
+import { Context } from "../../utils/Store";
+import "../Common.css";
 
 function Banner(props) {
   const [media, setMedia] = useState([]);
+  const [state] = useContext(Context);
 
   useEffect(() => {
+    console.warn("called again");
     getAllMedia()
       .then(({ data }) => {
         setMedia(data);
       })
       .catch((err) => console.warn("error", err));
-  }, []);
+  }, [state]);
 
   const properties = {
     duration: 4000,
@@ -24,10 +27,12 @@ function Banner(props) {
     pauseOnHover: true,
   };
 
+  const updatedMedia = state.media ? state.media : media;
+
   return (
     <div className="slide-container" style={{ height: "450px" }}>
       <Slide {...properties}>
-        {media.map((m, idx) => {
+        {updatedMedia.map((m, idx) => {
           return (
             <div
               key={idx}

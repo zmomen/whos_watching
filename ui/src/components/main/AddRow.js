@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const AddRow = ({ handleSubmit }) => {
+export const AddRow = ({ handleAdd }) => {
   const initialState = {
     title: "",
     media: "",
@@ -20,14 +20,8 @@ export const AddRow = ({ handleSubmit }) => {
     });
   };
 
-  const isDataValid = () => {
-    return (
-      rowData.title !== "" &&
-      rowData.genre !== "" &&
-      rowData.media !== "" &&
-      rowData.mediaUrl !== "" &&
-      rowData.notes !== ""
-    );
+  const isDataValid = (data) => {
+    return Object.values(data).every((e) => e !== "");
   };
 
   return (
@@ -71,23 +65,6 @@ export const AddRow = ({ handleSubmit }) => {
                 onChange={handleChange}
               />
             </td>
-            <td>
-              <br />
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (isDataValid()) {
-                    handleSubmit(e, rowData);
-                    setRowData(initialState);
-                  } else {
-                    setErrors(true);
-                  }
-                }}
-              >
-                Add
-              </button>
-            </td>
           </tr>
           <tr>
             <td>
@@ -113,6 +90,23 @@ export const AddRow = ({ handleSubmit }) => {
                 value={rowData.notes}
                 onChange={handleChange}
               />
+            </td>
+            <td>
+              <br />
+              <button
+                className="btn btn-success"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (isDataValid(rowData)) {
+                    handleAdd(rowData);
+                    setRowData(initialState);
+                  } else {
+                    setErrors(true);
+                  }
+                }}
+              >
+                Add
+              </button>
             </td>
           </tr>
         </tbody>

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../Common.css";
-import { Context } from "../../utils/Store";
 import * as api from "../../utils/api";
+import { Context } from "../../utils/Store";
+import "../Common.css";
 import { AddRow } from "./AddRow";
-import Popup from "reactjs-popup";
+import { UpdateRow } from "./UpdateRow";
 
 export const UserPreferences = () => {
-  const [state] = useContext(Context);
+  const [state, dispatch] = useContext(Context);
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
@@ -28,14 +28,32 @@ export const UserPreferences = () => {
       .catch((err) => console.warn("error", err));
   }, [state]);
 
-  const handleSubmit = (e, row) => {
-    e.preventDefault();
+  const handleAdd = (row) => {
     api
       .addUserPref(state.userId, row)
       .then(({ data }) => {
         setUserPrefs(userPrefs.concat(data));
+        dispatch({ type: "GET_ALL_MEDIA" });
       })
-      .catch((err) => console.warn("error", err));
+      .catch((err) => console.warn("error adding", err));
+  };
+
+  const handleUpdate = (row) => {
+    api
+      .updateUserPref(state.userId, row)
+      .then(({ data }) => {
+        // update state.
+        const newArr = userPrefs.slice();
+        const existingObj = newArr.find((item) => item.id === data.id);
+        if (existingObj) {
+          Object.assign(existingObj, data);
+        } else {
+          newArr.push(data);
+        }
+        setUserPrefs(newArr);
+        dispatch({ type: "GET_ALL_MEDIA" });
+      })
+      .catch((err) => console.warn("error updating", err));
   };
 
   return (
@@ -61,6 +79,7 @@ export const UserPreferences = () => {
         </li>
         <li className={"divider"}></li>
         <li>
+          {isAdding && <AddRow handleAdd={handleAdd} />}
           <table className="table table-hover">
             <thead>
               <tr>
@@ -83,50 +102,15 @@ export const UserPreferences = () => {
                     <td>{u.genre}</td>
                     <td>{u.notes}</td>
                     <td>
-                      <UpdateModal data={u} />
+                      <UpdateRow data={u} handleUpdate={handleUpdate} />
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          {isAdding && <AddRow handleSubmit={handleSubmit} />}
         </li>
       </ul>
     </div>
   );
 };
-
-const UpdateModal = ({ data }) => (
-  <Popup
-    trigger={<button className="btn"> Edit </button>}
-    modal
-    closeOnDocumentClick
-  >
-    <div>
-      <div>
-        <ul>
-          <li>Title</li>
-          <input value={data.title} />
-          <li>Media Type</li>
-          <input value={data.media} />
-          <li>Genre</li>
-          <input value={data.genre} />
-          <li>Notes</li>
-          <input value={data.notes} />
-        </ul>
-      </div>
-      <div className="update-btn">
-        <button
-          className="btn btn-primary"
-          onClick={(e) => {
-            e.preventDefault();
-            // updateRow(e, rowData);
-          }}
-        >
-          Update
-        </button>
-      </div>
-    </div>
-  </Popup>
-);

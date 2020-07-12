@@ -3,6 +3,7 @@ import Reducer from "./Reducer";
 
 const initialState = {
   userId: 3,
+  media: null,
 };
 
 const Store = ({ children }) => {
