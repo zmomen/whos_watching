@@ -10,7 +10,6 @@ function Banner(props) {
   const [state] = useContext(Context);
 
   useEffect(() => {
-    console.warn("called again");
     getAllMedia()
       .then(({ data }) => {
         setMedia(data);
