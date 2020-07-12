@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
-import "../Common.css";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import * as api from "../../utils/api";
-import { Context } from "../../utils/Store";
+import "../Common.css";
 
-export const SideMenu = () => {
-  const [state, dispatch] = useContext(Context);
+export const SideMenu = ({ currentUser }) => {
+  const history = useHistory();
   const [users, setUsers] = useState([]);
   useEffect(() => {
     api
@@ -16,10 +16,10 @@ export const SideMenu = () => {
   }, []);
 
   const changeSelected = (id) => {
-    dispatch({ type: "SET_GLOBAL_USER", payload: id });
+    history.push(`/users/${id}`);
   };
   return (
-    <div className={"side-menu"}>
+    <div>
       <ul className={"menu"}>
         <li>Who's Watching</li>
         <li className={"divider"} />
@@ -28,7 +28,7 @@ export const SideMenu = () => {
             <li key={idx} className={"menu-item"}>
               <div
                 className={`${
-                  state.userId === user.id ? "selected-user" : ""
+                  parseInt(currentUser) === user.id ? "selected-user" : ""
                 } c-hand`}
                 onClick={() => changeSelected(user.id)}
               >

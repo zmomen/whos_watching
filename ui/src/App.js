@@ -1,9 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "spectre.css";
 import Banner from "./components/layout/Banner";
 import Footer from "./components/layout/Footer";
+import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";
-import { SideMenu } from "./components/menu/SideMenu";
 import Store from "./utils/Store";
 
 const App = () => {
@@ -11,12 +12,19 @@ const App = () => {
     <Store>
       <div className={"container grid-lg"}>
         <Banner />
-        <div className="d-flex mt-2">
-          <SideMenu />
-          <UserPreferences />
-        </div>
-        <Footer />
+        <Router>
+          <Switch>
+            <Route path="/" component={UserPreferences} exact />
+            <Route path="/users/:id" component={UserPreferences} exact />
+            <Route
+              path={"/users/:id/preferences/:prefId"}
+              component={UpdateRow}
+              exact
+            />
+          </Switch>
+        </Router>
       </div>
+      <Footer />
     </Store>
   );
 };
