@@ -1,9 +1,24 @@
+import { getAllMedia } from "./api";
+
 const Reducer = (state, action) => {
   switch (action.type) {
     case "SET_GLOBAL_USER":
       return {
         ...state,
         userId: action.payload,
+      };
+    case "GET_ALL_MEDIA":
+      let mediaData = null;
+      getAllMedia()
+        .then(({ data }) => {
+          mediaData = data;
+          console.warn("got data", data);
+          console.warn("media data", mediaData);
+        })
+        .catch((err) => console.warn("dispatch err", err));
+      return {
+        ...state,
+        media: mediaData,
       };
     default:
       return state;

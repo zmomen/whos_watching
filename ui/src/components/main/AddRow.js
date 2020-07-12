@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const AddRow = ({ handleSubmit }) => {
+export const AddRow = ({ handleAdd }) => {
   const initialState = {
     title: "",
     media: "",
@@ -65,23 +65,6 @@ export const AddRow = ({ handleSubmit }) => {
                 onChange={handleChange}
               />
             </td>
-            <td>
-              <br />
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (isDataValid(rowData)) {
-                    handleSubmit(rowData);
-                    setRowData(initialState);
-                  } else {
-                    setErrors(true);
-                  }
-                }}
-              >
-                Add
-              </button>
-            </td>
           </tr>
           <tr>
             <td>
@@ -107,6 +90,23 @@ export const AddRow = ({ handleSubmit }) => {
                 value={rowData.notes}
                 onChange={handleChange}
               />
+            </td>
+            <td>
+              <br />
+              <button
+                className="btn btn-success"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (isDataValid(rowData)) {
+                    handleAdd(rowData);
+                    setRowData(initialState);
+                  } else {
+                    setErrors(true);
+                  }
+                }}
+              >
+                Add
+              </button>
             </td>
           </tr>
         </tbody>

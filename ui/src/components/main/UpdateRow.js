@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import Popup from "reactjs-popup";
 
 export const UpdateRow = ({ data, handleUpdate }) => {
-  //   const handleChange = (evt) => {
-  //     const name = evt.target.name;
-  //     const newValue = evt.target.value;
-  //     setUserInput({ [name]: newValue });
-  //   };
-
-  const [students, setStudents] = useState({ students: [] });
+  const [userPref, setUserPref] = useState(data ? data : {});
+  const [status, setStatus] = useState();
+  const handleChange = (evt) => {
+    setStatus(null);
+    const name = evt.target.name;
+    const newValue = evt.target.value;
+    setUserPref((prevState) => ({
+      ...prevState,
+      [name]: newValue,
+    }));
+  };
 
   return (
     <Popup
@@ -18,79 +22,70 @@ export const UpdateRow = ({ data, handleUpdate }) => {
         </button>
       }
       modal
-      closeOnDocumentClick
     >
-        
-    </Popup>
-  );
-};
-
-/*
-<div>
+      <div>
         <p>
-          <b>Edit Prefrerence: </b>
+          <b>
+            <u>Edit: </u>
+          </b>
         </p>
         <div>
           <div style={{ paddingBottom: "2rem" }}>
             <div style={{ float: "left" }}>
-              {capitalizeFirstLetter(userInput.title)}
+              <b>Title</b>
+            </div>
+            <div style={{ float: "right" }}>{userPref.title}</div>
+          </div>
+          <div style={{ paddingBottom: "2rem" }}>
+            <div style={{ float: "left" }}>
+              <b>Media</b>
+            </div>
+            <div style={{ float: "right" }}>{userPref.media}</div>
+          </div>
+          <div style={{ paddingBottom: "2rem" }}>
+            <div style={{ float: "left" }}>
+              <b>Genre</b>
+            </div>
+            <div style={{ float: "right" }}>{userPref.genre}</div>
+          </div>
+          <div style={{ paddingBottom: "2rem" }}>
+            <div style={{ float: "left" }}>
+              <b>URL</b>
             </div>
             <input
+              name="mediaUrl"
               style={{ float: "right" }}
-              value={userInput.title}
+              defaultValue={userPref.mediaUrl}
               onChange={handleChange}
             />
           </div>
           <div style={{ paddingBottom: "2rem" }}>
             <div style={{ float: "left" }}>
-              {capitalizeFirstLetter(userInput.genre)}
+              <b>Notes</b>
             </div>
             <input
+              name="notes"
               style={{ float: "right" }}
-              value={userInput.genre}
-              onChange={handleChange}
-            />
-          </div>
-          <div style={{ paddingBottom: "2rem" }}>
-            <div style={{ float: "left" }}>
-              {capitalizeFirstLetter(userInput.status)}
-            </div>
-            <input
-              style={{ float: "right" }}
-              value={userInput.status}
-              onChange={handleChange}
-            />
-          </div>
-          <div style={{ paddingBottom: "2rem" }}>
-            <div style={{ float: "left" }}>
-              {capitalizeFirstLetter(userInput.notes)}
-            </div>
-            <input
-              style={{ float: "right" }}
-              value={userInput.notes}
+              defaultValue={userPref.notes}
               onChange={handleChange}
             />
           </div>
         </div>
         <div className="edit-buttons">
           <button
+            name="Update"
             className="btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
-              handleUpdate(e, data);
+              handleUpdate(userPref);
+              setStatus(e.target.name);
             }}
           >
             Update
           </button>
-          <button
-            className="btn btn-error"
-            onClick={(e) => {
-              e.preventDefault();
-              // updateRow(e, rowData);
-            }}
-          >
-            Delete
-          </button>
         </div>
-      </div> 
-*/
+        {status && <div className={"text-center text-success"}>{status}d!</div>}
+      </div>
+    </Popup>
+  );
+};

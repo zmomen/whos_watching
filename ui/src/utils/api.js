@@ -25,9 +25,7 @@ export function addUserPref(id, row) {
 }
 
 export function updateUserPref(id, row) {
-  console.warn("update1!")
-  return;
-  // return instance.post(`/users/${id}/preferences`, row, config);
+  return instance.put(`/users/${id}/preferences/${row.id}`, row, config);
 }
 
 export function getAllMedia() {

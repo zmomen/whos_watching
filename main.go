@@ -12,11 +12,6 @@ import (
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	// w.Header().Set("Access-Control-Allow-Origin", "*")
-	// w.Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Content-Type, X-Auth-Token")
-	// if r.Method == http.MethodOptions {
-	// return
-	// }
 
 	var welcome = map[string]string{"message": "welcome to the who's watching api!"}
 	err := json.NewEncoder(w).Encode(welcome)
@@ -40,7 +35,8 @@ func main() {
 	router.HandleFunc("/users", userCtrlr.GetUsersHandler).Methods("GET")
 	router.HandleFunc("/users/{id}", userCtrlr.GetUserHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.GetUserPrefsHandler).Methods("GET")
-	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.GetUserPrefHandler).Methods("GET")
+	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.GetSingleUserPrefHandler).Methods("GET")
+	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.UpdateUserPrefHandler).Methods("PUT")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.CreateUserPrefHandler).Methods("POST")
 	router.HandleFunc("/media", mediaCtrlr.GetAllMediaHandler).Methods("GET")
 

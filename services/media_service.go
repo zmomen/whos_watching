@@ -7,10 +7,11 @@ import (
 )
 
 const (
-	InsertMedia = "INSERT INTO media (title, media_type, genre) VALUES " +
-		"(?, ?, ?) "
+	InsertMedia = "INSERT INTO media (title, media_type, genre, media_url) VALUES " +
+		"(?, ?, ?, ?) "
 
-	SelectMedia = "SELECT title, media_type, genre, COALESCE(media_url, '') as media_url FROM media ORDER BY RAND() "
+	SelectMedia    = "SELECT title, media_type, genre, COALESCE(media_url, '') as media_url FROM media ORDER BY RAND() "
+	UpdateMediaQry = "UPDATE media SET title = ?, media_type = ?, genre = ?, media_url = ? WHERE id = ? "
 )
 
 type MediaService struct {
@@ -42,7 +43,7 @@ func (m *MediaService) GetAllMedia() []models.MediaModel {
 }
 
 func (m *MediaService) AddMedia(medium models.MediaModel) int64 {
-	res, err := m.database.Exec(InsertMedia, medium.Title, medium.MediaType, medium.Genre)
+	res, err := m.database.Exec(InsertMedia, medium.Title, medium.MediaType, medium.Genre, medium.MediaUrl)
 	if err != nil {
 		log.Panic(err.Error())
 		return -1
@@ -50,4 +51,15 @@ func (m *MediaService) AddMedia(medium models.MediaModel) int64 {
 	log.Println("media added!")
 	newId, _ := res.LastInsertId()
 	return newId
+}
+
+func (m *MediaService) UpdateMedia(request models.UserPrefsModelRequest, mediaId string) int64 {
+	res, err := m.database.Exec(UpdateMediaQry, request.Title, request.MediaType, request.Genre, request.MediaUrl, mediaId)
+	if err != nil {
+		log.Panic(err.Error())
+		return -1
+	}
+	log.Println("media updated!")
+	rowsAffected, _ := res.RowsAffected()
+	return rowsAffected
 }

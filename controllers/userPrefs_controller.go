@@ -23,9 +23,9 @@ func NewUserPrefsController(db *sql.DB) *UserPrefsController {
 	}
 }
 
-func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http.Request) {
+func (c *UserPrefsController) GetSingleUserPrefHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	response := c.ups.GetUserPrefs(vars["id"])
+	response := c.ups.GetSingleUserPreference(vars["id"], vars["prefId"],)
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusOK)
@@ -35,9 +35,9 @@ func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http
 	}
 }
 
-func (c *UserPrefsController) GetUserPrefHandler(w http.ResponseWriter, r *http.Request) {
+func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	response := c.ups.GetUserPreference(vars["id"], vars["prefId"])
+	response := c.ups.GetUserPrefs(vars["id"])
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusOK)
@@ -62,6 +62,28 @@ func (c *UserPrefsController) CreateUserPrefHandler(w http.ResponseWriter, r *ht
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusCreated)
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Printf("error encoding json")
+	}
+}
+
+func (c *UserPrefsController) UpdateUserPrefHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	var userPref models.UserPrefsModelRequest
+	decoder := json.NewDecoder(r.Body)
+
+	if err := decoder.Decode(&userPref); err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		return
+	}
+	defer r.Body.Close()
+
+	response := c.ups.UpdateUserPreference(vars["id"], vars["prefId"], userPref)
+
+	log.Println(r.Method, r.URL.String())
+	w.WriteHeader(http.StatusOK)
 	err := json.NewEncoder(w).Encode(response)
 	if err != nil {
 		log.Printf("error encoding json")

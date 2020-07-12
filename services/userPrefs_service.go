@@ -7,20 +7,21 @@ import (
 )
 
 const (
-	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes " +
+	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes, m.media_url " +
 		"from users u " +
 		"inner join user_prefs up on u.id = up.user_id " +
 		"inner join media m on m.id = up.media_id where u.id = ?"
 
-	SelectUserPreference = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes " +
-		"from users u " +
-		"inner join user_prefs up on u.id = up.user_id " +
-		"inner join media m on m.id = up.media_id where u.id = ? and up.id = ?"
+	SelectUserPreference = "SELECT up.id, up.user_id, up.media_id, up.status, up.notes " +
+		"from user_prefs up " +
+		"inner join users u on up.user_id = u.id " +
+		"where up.user_id = ? and up.id = ? "
 
 	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes) " +
 		"VALUES (?, ?, ?, ?) "
 
-	NewStatus = "Active"
+	UpdateUserPref = "UPDATE user_prefs SET status = ?, notes = ? where id = ? "
+	NewStatus      = "Active"
 )
 
 type UserPrefsService struct {
@@ -35,8 +36,8 @@ func NewUserPrefsService(db *sql.DB) *UserPrefsService {
 	}
 }
 
-func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) *models.UserPrefsModel {
-	var model *models.UserPrefsModel
+func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) *models.UserPrefsModelRequest {
+	var model *models.UserPrefsModelRequest
 
 	log.Println("Adding new media...", medium.MediaType, medium)
 	newMediaId := u.ms.AddMedia(medium)
@@ -49,13 +50,14 @@ func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) 
 			return model
 		}
 		newPrefId, _ := res.LastInsertId()
-		model = &models.UserPrefsModel{
+		model = &models.UserPrefsModelRequest{
 			PrefID:    newPrefId,
 			Title:     medium.Title,
 			MediaType: medium.MediaType,
 			Genre:     medium.Genre,
 			Notes:     medium.Notes,
 			Status:    "Active",
+			MediaUrl:  medium.MediaUrl,
 		}
 		log.Println("User pref added!")
 	} else {
@@ -65,7 +67,7 @@ func (u *UserPrefsService) AddUserPref(userId string, medium models.MediaModel) 
 	return model
 }
 
-func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
+func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModelRequest {
 
 	res, err := u.database.Query(SelectUserPrefs, userId)
 
@@ -73,11 +75,11 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 		log.Panic(err.Error())
 	}
 
-	var pref models.UserPrefsModel
-	var prefArry = make([]models.UserPrefsModel, 0)
+	var pref models.UserPrefsModelRequest
+	var prefArry = make([]models.UserPrefsModelRequest, 0)
 
 	for res.Next() {
-		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes)
+		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes, &pref.MediaUrl)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}
@@ -86,21 +88,36 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModel {
 	return prefArry
 }
 
-func (u *UserPrefsService) GetUserPreference(userId string, prefId string) models.UserPrefsModel {
-
+func (u *UserPrefsService) GetSingleUserPreference(userId string, prefId string) models.UserPrefsModel {
 	res, err := u.database.Query(SelectUserPreference, userId, prefId)
 
 	if err != nil {
 		log.Panic(err.Error())
 	}
-
 	var pref models.UserPrefsModel
 
 	for res.Next() {
-		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes)
+		err = res.Scan(&pref.PrefID, &pref.UserID, &pref.MediaID, &pref.Status, &pref.Notes)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}
 	}
 	return pref
+}
+
+func (u *UserPrefsService) UpdateUserPreference(userId string, prefId string, request models.UserPrefsModelRequest) models.UserPrefsModelRequest {
+	log.Println("Updating user prefs...")
+	_, err := u.database.Exec(UpdateUserPref, request.Status, request.Notes, prefId)
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	updatedPref := u.GetSingleUserPreference(userId, prefId)
+
+	res := u.ms.UpdateMedia(request, updatedPref.MediaID)
+	if res != -1 {
+		log.Println("user preference updated.")
+	} else {
+		log.Panicln("Error! Failed to update user pref...")
+	}
+	return request
 }

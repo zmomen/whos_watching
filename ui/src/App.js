@@ -1,9 +1,9 @@
 import React from "react";
 import "spectre.css";
-import Footer from "./components/layout/Footer";
 import Banner from "./components/layout/Banner";
-import { SideMenu } from "./components/menu/SideMenu";
+import Footer from "./components/layout/Footer";
 import { UserPreferences } from "./components/main/UserPreferences";
+import { SideMenu } from "./components/menu/SideMenu";
 import Store from "./utils/Store";
 
 const App = () => {
