@@ -43,4 +43,9 @@ ALTER TABLE
 ADD
   COLUMN notes TEXT;
 
+ALTER TABLE
+  whos_watching.user_prefs
+ADD
+  COLUMN priority text NOT NULL comment '';
+
 

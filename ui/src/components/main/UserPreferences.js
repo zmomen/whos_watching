@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import * as api from "../../utils/api";
 import { Context } from "../../utils/Store";
 import "../Common.css";
-import { AddRow } from "./AddRow";
-import { Link } from "react-router-dom";
 import { SideMenu } from "../menu/SideMenu";
+import { AddRow } from "./AddRow";
 
 export const UserPreferences = ({ match }) => {
   let paramUserId = match.params.id || 3;
@@ -25,7 +25,7 @@ export const UserPreferences = ({ match }) => {
     api
       .getUserPrefs(paramUserId)
       .then(({ data }) => {
-        setUserPrefs(data);
+        setUserPrefs(data.sort((a, b) => (a.priority > b.priority ? 1 : -1)));
       })
       .catch((err) => console.warn("error", err));
   }, [paramUserId]);
@@ -88,35 +88,97 @@ export const UserPreferences = ({ match }) => {
                 </tr>
               </thead>
               <tbody>
-                {userPrefs.map((up, idx) => {
-                  return (
-                    <tr
-                      key={idx}
-                      className={`${(idx + 1) % 2 === 0 ? "active" : ""}`}
-                    >
-                      <td>{up.title}</td>
-                      <td>{up.media}</td>
-                      <td>{up.genre}</td>
-                      <td>{up.notes}</td>
-                      <td>
-                        <Link
-                          to={{
-                            pathname: `/users/${paramUserId}/preferences/${up.id}`,
-                            state: up,
-                          }}
-                        >
-                          <img
-                            className="c-hand"
-                            width="40"
-                            height="40"
-                            src="/images/icons/icon-edit.png"
-                            alt={"edit"}
-                          />
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {userPrefs
+                  .filter((u) => u.status === "active")
+                  .map((up, idx) => {
+                    return (
+                      <tr
+                        key={idx}
+                        className={`${
+                          up.priority === "high"
+                            ? "priority-high"
+                            : "priority-low"
+                        }`}
+                      >
+                        <td>{up.title}</td>
+                        <td>{up.media}</td>
+                        <td>{up.genre}</td>
+                        <td>{up.notes}</td>
+                        <td>
+                          <Link
+                            to={{
+                              pathname: `/users/${paramUserId}/preferences/${up.id}`,
+                              state: up,
+                            }}
+                          >
+                            <img
+                              className="c-hand"
+                              width="40"
+                              height="40"
+                              src="/images/icons/icon-edit.png"
+                              alt={"edit"}
+                            />
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </li>
+        </ul>
+        <br />
+        {/* showcomplete */}
+        <ul className={"menu"}>
+          <li>
+            <div
+              className="d-flex"
+              style={{ justifyContent: "space-between", alignItems: "center" }}
+            >
+              <div className="text-success">Completed shows</div>
+            </div>
+          </li>
+          <li className={"divider"}></li>
+          <li>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Genre</th>
+                  <th>Notes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {userPrefs
+                  .filter((m) => m.status === "complete")
+                  .map((up, idx) => {
+                    return (
+                      <tr key={idx}>
+                        <td>{up.title}</td>
+                        <td>{up.media}</td>
+                        <td>{up.genre}</td>
+                        <td>{up.notes}</td>
+                        <td>
+                          <Link
+                            to={{
+                              pathname: `/users/${paramUserId}/preferences/${up.id}`,
+                              state: up,
+                            }}
+                          >
+                            <img
+                              className="c-hand"
+                              width="40"
+                              height="40"
+                              src="/images/icons/icon-edit.png"
+                              alt={"edit"}
+                            />
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </li>

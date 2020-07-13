@@ -1,12 +1,13 @@
-import React, { useState, useContext } from "react";
-import { updateUserPref } from "../../utils/api";
-import { SideMenu } from "../menu/SideMenu";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { updateUserPref } from "../../utils/api";
 import { Context } from "../../utils/Store";
+import { SideMenu } from "../menu/SideMenu";
 
 export const UpdateRow = ({ match, location }) => {
   const history = useHistory();
   let dataToUpdate = location.state;
+  console.warn("Data d", dataToUpdate);
   const [state, dispatch] = useContext(Context);
   let paramUserId = match.params.id || 3;
   const [userPref, setUserPref] = useState(dataToUpdate ? dataToUpdate : {});
@@ -22,18 +23,8 @@ export const UpdateRow = ({ match, location }) => {
   const handleUpdate = (row) => {
     updateUserPref(paramUserId, row)
       .then(({ data }) => {
-        console.warn("data updated", data);
         dispatch({ type: "GET_ALL_MEDIA" });
         history.push(`/users/${paramUserId}`);
-        // update state.
-        // const newArr = userPrefs.slice();
-        // const existingObj = newArr.find((item) => item.id === data.id);
-        // if (existingObj) {
-        //   Object.assign(existingObj, data);
-        // } else {
-        //   newArr.push(data);
-        // }
-        // setUserPrefs(newArr);
       })
       .catch((err) => console.warn("error updating", err));
   };
@@ -70,6 +61,31 @@ export const UpdateRow = ({ match, location }) => {
               </div>
               <div style={{ display: "table-row" }}>
                 <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+                  <b>Status</b>
+                </div>
+                <span style={{ paddingRight: ".25rem" }}>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="active"
+                    defaultChecked={userPref.status === "active"}
+                    onChange={handleChange}
+                  />
+                </span>
+                <span style={{ paddingRight: ".25rem" }}>Active</span>
+                <span style={{ paddingRight: ".25rem" }}>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="complete"
+                    onChange={handleChange}
+                    defaultChecked={userPref.status === "complete"}
+                  />
+                </span>
+                <span style={{ paddingRight: ".25rem" }}>Complete</span>
+              </div>
+              <div style={{ display: "table-row" }}>
+                <div style={{ display: "table-cell", paddingRight: "1rem" }}>
                   <b>URL</b>
                 </div>
                 <input
@@ -90,6 +106,31 @@ export const UpdateRow = ({ match, location }) => {
                   onChange={handleChange}
                 />
               </div>
+            </div>
+            <div style={{ display: "table-row" }}>
+              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+                <b>Priority</b>
+              </div>
+              <span style={{ paddingRight: ".25rem" }}>
+                <input
+                  type="radio"
+                  name="priority"
+                  value="high"
+                  defaultChecked={userPref.priority === "high"}
+                  onChange={handleChange}
+                />
+              </span>
+              <span style={{ paddingRight: ".25rem" }}>High</span>
+              <span style={{ paddingRight: ".25rem" }}>
+                <input
+                  type="radio"
+                  name="priority"
+                  value="low"
+                  onChange={handleChange}
+                  defaultChecked={userPref.priority === "low"}
+                />
+              </span>
+              <span style={{ paddingRight: ".25rem" }}>Low</span>
             </div>
             <div className="edit-buttons">
               <button

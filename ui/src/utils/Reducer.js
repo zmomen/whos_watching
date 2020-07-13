@@ -12,8 +12,6 @@ const Reducer = (state, action) => {
       getAllMedia()
         .then(({ data }) => {
           mediaData = data;
-          console.warn("got data", data);
-          console.warn("media data", mediaData);
         })
         .catch((err) => console.warn("dispatch err", err));
       return {

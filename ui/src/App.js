@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "spectre.css";
+import "./components/Common.css";
 import Banner from "./components/layout/Banner";
 import Footer from "./components/layout/Footer";
 import { UpdateRow } from "./components/main/UpdateRow";
@@ -10,7 +11,7 @@ import Store from "./utils/Store";
 const App = () => {
   return (
     <Store>
-      <div className={"container grid-lg"}>
+      <div className={"container grid-lg black"}>
         <Banner />
         <Router>
           <Switch>

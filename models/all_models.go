@@ -16,6 +16,7 @@ type UserPrefsModelRequest struct {
 	Status    string `json:"status"`
 	Notes     string `json:"notes"`
 	MediaUrl  string `json:"mediaUrl"`
+	Priority  string `json:"priority"`
 }
 
 type UserModel struct {

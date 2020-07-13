@@ -4,8 +4,19 @@
   justify-content: space-evenly;
 }
 
+.black {
+  color: black;
+}
 .side-menu {
   width: 30%;
+}
+
+.priority-high {
+  background-color: #ffff83;
+}
+
+.priority-low {
+  background-color: #888888;
 }
 
 .menu-element {
