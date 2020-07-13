@@ -32,7 +32,7 @@ func (d *Database) getConfig() Credentials {
 	jsonFile, err := os.Open("db/config.json")
 	// if we os.Open returns an error then handle it
 	if err != nil {
-		log.Println(err)
+		log.Fatalln("file open error", err)
 	}
 	log.Println("Successfully Read config file")
 	// defer the closing of our jsonFile so that we can parse it later on
@@ -43,7 +43,7 @@ func (d *Database) getConfig() Credentials {
 	var dbCreds Credentials
 	err = json.Unmarshal(byteValue, &dbCreds)
 	if err != nil {
-		log.Println(err)
+		log.Fatalln("json err", err)
 	}
 	return dbCreds
 }
@@ -53,7 +53,8 @@ func (d *Database) setupDb(dbCreds Credentials) *sql.DB {
 	db, err := sql.Open("mysql", dbCreds.Username+":"+dbCreds.Password+"@tcp("+dbCreds.Host+":"+dbCreds.Port+")/"+dbCreds.Database)
 	// if there is an error opening the connection, handle it
 	if err != nil {
-		log.Panicln(err.Error())
+		log.Fatalln("db conn err", err.Error())
+		return nil
 	}
 
 	log.Println("Connection Successful!")
