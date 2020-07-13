@@ -1,0 +1,269 @@
+echo "Building who's watching..."
+Building who's watching...
+go build -o whos_watching_exec main.go
+codesign -s - whos_watching_exec
+make: codesign: Command not found
+make: *** [build] Error 127
+./whos_watching_exec
+2020/07/12 15:44:28 setting up db...
+2020/07/12 15:44:28 Successfully Read config file
+2020/07/12 15:44:28 Connection Successful!
+2020/07/12 15:44:28 starting server...
+2020/07/12 15:44:33 GET /media
+2020/07/12 15:44:33 GET /users
+2020/07/12 15:44:33 GET /users/3/preferences
+2020/07/12 15:44:33 GET /users/3
+2020/07/12 15:44:36 GET /users
+2020/07/12 15:44:36 GET /media
+2020/07/12 15:44:36 GET /users/3
+2020/07/12 15:44:36 GET /users/3/preferences
+2020/07/12 15:44:54 GET /users/2
+2020/07/12 15:44:54 GET /users/2/preferences
+2020/07/12 15:44:54 GET /media
+2020/07/12 15:45:02 GET /users/1
+2020/07/12 15:45:02 GET /media
+2020/07/12 15:45:02 GET /users/1/preferences
+2020/07/12 15:45:19 GET /users/3
+2020/07/12 15:45:19 GET /users/3/preferences
+2020/07/12 15:45:19 GET /media
+2020/07/12 15:45:22 GET /media
+2020/07/12 15:45:22 GET /users/2
+2020/07/12 15:45:22 GET /users/2/preferences
+2020/07/12 15:45:23 GET /media
+2020/07/12 15:45:23 GET /users/1
+2020/07/12 15:45:23 GET /users/1/preferences
+make: *** [run] Interrupt
+echo "Building who's watching..."
+Building who's watching...
+go build -o whos_watching_exec main.go
+codesign -s - whos_watching_exec
+make: codesign: Command not found
+make: *** [build] Error 127
+./whos_watching_exec
+2020/07/12 18:14:51 setting up db...
+2020/07/12 18:14:51 Successfully Read config file
+2020/07/12 18:14:51 Connection Successful!
+2020/07/12 18:14:51 starting server...
+make: *** [run] Interrupt
+echo "Building who's watching..."
+Building who's watching...
+go build -o whos_watching_exec main.go
+codesign -s - whos_watching_exec
+make: codesign: Command not found
+make: *** [build] Error 127
+./whos_watching_exec
+2020/07/12 18:18:17 setting up db...
+2020/07/12 18:18:17 Successfully Read config file
+2020/07/12 18:18:17 Connection Successful!
+2020/07/12 18:18:17 starting server...
+2020/07/12 18:18:20 GET /media
+2020/07/12 18:18:20 GET /users
+2020/07/12 18:18:20 GET /users/3
+2020/07/12 18:18:20 GET /users/3/preferences
+2020/07/12 18:18:22 GET /media
+2020/07/12 18:18:22 GET /users
+2020/07/12 18:18:22 GET /users/3
+2020/07/12 18:18:22 GET /users/3/preferences
+2020/07/12 18:18:28 GET /users/3
+2020/07/12 18:18:28 GET /users/3/preferences
+2020/07/12 18:18:28 GET /users
+2020/07/12 18:18:28 GET /media
+2020/07/12 18:18:30 GET /media
+2020/07/12 18:18:30 GET /users
+2020/07/12 18:18:30 GET /users/3
+2020/07/12 18:18:30 GET /users/3/preferences
+2020/07/12 18:18:35 GET /media
+2020/07/12 18:18:35 GET /users
+2020/07/12 18:18:35 GET /users/3/preferences
+2020/07/12 18:18:35 GET /users/3
+2020/07/12 18:18:42 GET /users/2
+2020/07/12 18:18:42 GET /users/2/preferences
+2020/07/12 18:18:43 GET /users/1
+2020/07/12 18:18:43 GET /users/1/preferences
+2020/07/12 18:18:44 GET /users
+2020/07/12 18:18:45 GET /users
+2020/07/12 18:18:45 GET /users/2/preferences
+2020/07/12 18:18:46 GET /users/2
+2020/07/12 19:21:16 GET /media
+2020/07/12 19:21:16 GET /users
+2020/07/12 19:21:16 GET /users/3
+2020/07/12 19:21:16 GET /users/3/preferences
+2020/07/12 19:21:43 GET /users/1/preferences
+2020/07/12 19:21:43 GET /users/1
+2020/07/12 19:21:50 GET /users/2/preferences
+2020/07/12 19:21:50 GET /users/2
+2020/07/12 19:21:58 GET /users
+2020/07/12 19:22:08 Updating user prefs...
+2020/07/12 19:22:08 media updated!
+2020/07/12 19:22:08 user preference updated.
+2020/07/12 19:22:08 PUT /users/2/preferences/4
+2020/07/12 19:22:08 GET /media
+2020/07/12 19:22:08 GET /media
+2020/07/12 19:22:08 GET /users/2
+2020/07/12 19:22:08 GET /users
+2020/07/12 19:22:08 GET /users/2/preferences
+2020/07/12 19:22:34 GET /users/3
+2020/07/12 19:22:34 GET /users/3/preferences
+2020/07/12 19:24:14 Adding new media... TV Show {Killing Eve TV Show Mystery https://pmcdeadline2.files.wordpress.com/2019/12/bbca_ke_207_1920x1080-ep.jpg?w=681&h=383&crop=1 s1}
+2020/07/12 19:24:14 media added!
+2020/07/12 19:24:14 Adding user pref...
+2020/07/12 19:24:14 User pref added!
+2020/07/12 19:24:14 POST /users/3/preferences
+2020/07/12 19:24:15 GET /media
+2020/07/12 19:24:15 GET /media
+2020/07/12 19:24:23 GET /users
+2020/07/12 19:25:02 GET /users
+2020/07/12 19:25:02 GET /users/2/preferences
+2020/07/12 19:25:03 GET /users/2
+2020/07/12 19:25:06 GET /users/3
+2020/07/12 19:25:06 GET /users/3/preferences
+2020/07/12 19:25:14 GET /users
+2020/07/12 19:25:37 Updating user prefs...
+2020/07/12 19:25:37 media updated!
+2020/07/12 19:25:37 user preference updated.
+2020/07/12 19:25:37 PUT /users/3/preferences/25
+2020/07/12 19:25:37 GET /media
+2020/07/12 19:25:37 GET /media
+2020/07/12 19:25:37 GET /users
+2020/07/12 19:25:37 GET /users/3
+2020/07/12 19:25:37 GET /users/3/preferences
+2020/07/12 19:25:48 GET /media
+2020/07/12 19:25:48 GET /users/3
+2020/07/12 19:25:48 GET /users
+2020/07/12 19:25:48 GET /users/3/preferences
+2020/07/12 19:26:08 GET /users/2
+2020/07/12 19:26:08 GET /users/2/preferences
+2020/07/12 19:26:11 GET /users/1
+2020/07/12 19:26:11 GET /users/1/preferences
+2020/07/12 19:26:16 GET /users/3/preferences
+2020/07/12 19:26:16 GET /users/3
+2020/07/12 19:26:18 GET /users/1
+2020/07/12 19:26:18 GET /users/1/preferences
+2020/07/12 19:28:00 GET /users/3/preferences
+2020/07/12 19:28:00 GET /users/3
+2020/07/12 19:28:24 GET /users
+2020/07/12 19:28:43 Updating user prefs...
+2020/07/12 19:28:43 Updating user prefs...
+2020/07/12 19:28:43 media updated!
+2020/07/12 19:28:43 user preference updated.
+2020/07/12 19:28:43 PUT /users/3/preferences/25
+2020/07/12 19:28:43 media updated!
+2020/07/12 19:28:43 user preference updated.
+2020/07/12 19:28:43 PUT /users/3/preferences/25
+2020/07/12 19:28:43 GET /users
+2020/07/12 19:28:43 GET /users/3
+2020/07/12 19:28:43 GET /users/3/preferences
+2020/07/12 19:28:43 GET /media
+2020/07/12 19:28:43 GET /media
+2020/07/12 19:28:43 GET /media
+2020/07/12 19:28:43 GET /media
+2020/07/12 19:31:01 GET /users
+2020/07/12 19:31:08 Updating user prefs...
+2020/07/12 19:31:08 media updated!
+2020/07/12 19:31:08 user preference updated.
+2020/07/12 19:31:08 PUT /users/3/preferences/5
+2020/07/12 19:31:08 GET /users
+2020/07/12 19:31:08 GET /media
+2020/07/12 19:31:08 GET /users/3
+2020/07/12 19:31:08 GET /users/3/preferences
+2020/07/12 19:31:08 GET /media
+2020/07/12 19:31:21 GET /users/2
+2020/07/12 19:31:21 GET /users/2/preferences
+2020/07/12 19:31:33 GET /media
+2020/07/12 19:31:33 GET /users
+2020/07/12 19:31:33 GET /users/3
+2020/07/12 19:31:33 GET /users/3/preferences
+2020/07/12 19:31:40 GET /users
+2020/07/12 19:31:43 Updating user prefs...
+2020/07/12 19:31:43 media updated!
+2020/07/12 19:31:43 user preference updated.
+2020/07/12 19:31:43 PUT /users/3/preferences/5
+2020/07/12 19:31:43 GET /users
+2020/07/12 19:31:43 GET /media
+2020/07/12 19:31:43 GET /users/3/preferences
+2020/07/12 19:31:43 GET /media
+2020/07/12 19:31:43 GET /users/3
+2020/07/12 19:31:46 GET /users/2/preferences
+2020/07/12 19:31:46 GET /users/2
+2020/07/12 19:31:48 GET /users/1/preferences
+2020/07/12 19:31:48 GET /users/1
+2020/07/12 19:31:48 GET /users/2
+2020/07/12 19:31:48 GET /users/2/preferences
+2020/07/12 19:31:49 GET /users/3/preferences
+2020/07/12 19:31:49 GET /users/3
+2020/07/12 19:42:05 GET /users
+2020/07/12 19:42:16 GET /users
+2020/07/12 19:42:16 GET /users/1
+2020/07/12 19:42:16 GET /users/1/preferences
+2020/07/12 19:42:56 GET /users/3
+2020/07/12 19:42:56 GET /media
+2020/07/12 19:42:56 GET /users
+2020/07/12 19:42:56 GET /users/3/preferences
+2020/07/12 19:48:04 GET /media
+2020/07/12 19:48:04 GET /users
+2020/07/12 19:48:04 GET /users/3
+2020/07/12 19:48:04 GET /users/3/preferences
+make: *** [run] Terminated
+echo "Building who's watching..."
+Building who's watching...
+go build -o whos_watching_exec main.go
+codesign -s - whos_watching_exec
+make: codesign: Command not found
+make: *** [build] Error 127
+./whos_watching_exec
+2020/07/12 21:59:17 setting up db...
+2020/07/12 21:59:17 Successfully Read config file
+2020/07/12 21:59:17 Connection Successful!
+2020/07/12 21:59:17 starting server...
+make: *** [run] Interrupt
+echo "Building who's watching..."
+Building who's watching...
+go build -o whos_watching_exec main.go
+codesign -s - whos_watching_exec
+make: codesign: Command not found
+make: *** [build] Error 127
+./whos_watching_exec
+2020/07/12 22:00:41 setting up db...
+2020/07/12 22:00:41 Successfully Read config file
+2020/07/12 22:00:41 Connection Successful!
+2020/07/12 22:00:41 starting server...
+2020/07/12 22:35:18 GET /users
+2020/07/12 22:35:18 GET /media
+2020/07/12 22:35:18 GET /users/3
+2020/07/12 22:35:18 GET /users/3/preferences
+2020/07/12 22:35:25 GET /users/2
+2020/07/12 22:35:25 GET /users/2/preferences
+2020/07/12 22:35:26 GET /users/1
+2020/07/12 22:35:26 GET /users/1/preferences
+2020/07/12 22:35:31 GET /media
+2020/07/12 22:35:31 GET /users
+2020/07/12 22:35:31 GET /users/1
+2020/07/12 22:35:31 GET /users/1/preferences
+2020/07/12 22:35:33 GET /users/2
+2020/07/12 22:35:33 GET /users/2/preferences
+2020/07/12 22:35:34 GET /users/1
+2020/07/12 22:35:34 GET /users/1/preferences
+2020/07/12 22:36:44 GET /media
+2020/07/12 22:36:44 GET /users
+2020/07/12 22:36:44 GET /users/1
+2020/07/12 22:36:44 GET /users/1/preferences
+2020/07/12 22:36:48 GET /users/2
+2020/07/12 22:36:48 GET /users/2/preferences
+2020/07/12 22:36:49 GET /users/3/preferences
+2020/07/12 22:36:50 GET /users/3
+2020/07/12 22:37:31 GET /media
+2020/07/12 22:37:31 GET /users/3
+2020/07/12 22:37:31 GET /users
+2020/07/12 22:37:31 GET /users/3/preferences
+2020/07/12 22:37:37 GET /users/2/preferences
+2020/07/12 22:37:37 GET /users/2
+2020/07/12 22:37:40 GET /users/1
+2020/07/12 22:37:40 GET /users/1/preferences
+2020/07/12 22:37:45 GET /users/2
+2020/07/12 22:37:45 GET /users/2/preferences
+2020/07/12 22:37:52 GET /users
+2020/07/12 22:37:55 GET /users
+2020/07/12 22:37:55 GET /users/1
+2020/07/12 22:37:55 GET /users/1/preferences
+2020/07/12 22:37:56 GET /users/3/preferences
+2020/07/12 22:37:57 GET /users/3

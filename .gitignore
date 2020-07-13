@@ -1,6 +1,7 @@
 ui/remote_start
 ui/.env
 whos_watching_exec
+ui/build/**
 
 db/config.json
 
