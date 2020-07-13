@@ -49,16 +49,16 @@ func (c *UserPrefsController) GetUserPrefsHandler(w http.ResponseWriter, r *http
 
 func (c *UserPrefsController) CreateUserPrefHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	var medium models.MediaModel
+	var request models.UserPrefsModelRequest
 	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&medium); err != nil {
+	if err := decoder.Decode(&request); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 	defer r.Body.Close()
 
-	response := c.ups.AddUserPref(vars["id"], medium)
+	response := c.ups.AddUserPref(vars["id"], request)
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusCreated)

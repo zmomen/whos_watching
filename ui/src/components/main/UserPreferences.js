@@ -7,8 +7,8 @@ import { SideMenu } from "../menu/SideMenu";
 import { AddRow } from "./AddRow";
 
 export const UserPreferences = ({ match }) => {
-  let paramUserId = match.params.id || 3;
   const [state, dispatch] = useContext(Context);
+  let paramUserId = match.params.id || state.userId;
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
@@ -32,7 +32,7 @@ export const UserPreferences = ({ match }) => {
 
   const handleAdd = (row) => {
     api
-      .addUserPref(state.userId, row)
+      .addUserPref(paramUserId, row)
       .then(({ data }) => {
         setUserPrefs(userPrefs.concat(data));
         dispatch({ type: "GET_ALL_MEDIA" });

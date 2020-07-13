@@ -3,20 +3,20 @@ package service
 type UserPrefsModel struct {
 	PrefID  int64  `json:"id,omitempty"`
 	UserID  int64  `json:"userId,omitempty"`
-	MediaID string  `json:"mediaId,omitempty"`
+	MediaID string `json:"mediaId,omitempty"`
 	Status  string `json:"status,omitempty"`
 	Notes   string `json:"notes,omitempty"`
 }
 
 type UserPrefsModelRequest struct {
 	PrefID    int64  `json:"id"`
+	Status    string `json:"status"`
+	Notes     string `json:"notes"`
+	Priority  string `json:"priority"`
 	Title     string `json:"title"`
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
-	Status    string `json:"status"`
-	Notes     string `json:"notes"`
 	MediaUrl  string `json:"mediaUrl"`
-	Priority  string `json:"priority"`
 }
 
 type UserModel struct {
@@ -30,5 +30,4 @@ type MediaModel struct {
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
-	Notes     string `json:"notes"`
 }

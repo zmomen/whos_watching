@@ -42,8 +42,8 @@ func (m *MediaService) GetAllMedia() []models.MediaModel {
 	return mediaArry
 }
 
-func (m *MediaService) AddMedia(medium models.MediaModel) int64 {
-	res, err := m.database.Exec(InsertMedia, medium.Title, medium.MediaType, medium.Genre, medium.MediaUrl)
+func (m *MediaService) AddMedia(request models.UserPrefsModelRequest) int64 {
+	res, err := m.database.Exec(InsertMedia, request.Title, request.MediaType, request.Genre, request.MediaUrl)
 	if err != nil {
 		log.Panic(err.Error())
 		return -1
