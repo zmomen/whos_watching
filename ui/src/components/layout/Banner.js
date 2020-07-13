@@ -26,7 +26,9 @@ function Banner(props) {
     pauseOnHover: true,
   };
 
-  const updatedMedia = state.media ? state.media : media;
+  const updatedMedia = (state.media ? state.media : media).filter(
+    (medium) => medium.mediaUrl !== ""
+  );
 
   return (
     <div className="slide-container" style={{ height: "450px" }}>

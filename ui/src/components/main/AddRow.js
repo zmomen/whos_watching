@@ -21,7 +21,7 @@ export const AddRow = ({ handleAdd }) => {
   };
 
   const isDataValid = (data) => {
-    return Object.values(data).every((e) => e !== "");
+    return data.title !== "" && data.media !== "" && data.genre !== "";
   };
 
   return (
@@ -111,7 +111,11 @@ export const AddRow = ({ handleAdd }) => {
           </tr>
         </tbody>
       </table>
-      {errors && <div style={{ color: "red" }}>Error: missing data</div>}
+      {errors && (
+        <div style={{ color: "red" }}>
+          Error: title, media, or genre cannot be empty
+        </div>
+      )}
     </div>
   );
 };
