@@ -4,6 +4,7 @@ whos_watching_exec
 ui/build/**
 
 db/config.json
+nohup.out
 
 HELP.md
 .gradle
