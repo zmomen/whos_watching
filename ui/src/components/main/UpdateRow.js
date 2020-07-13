@@ -6,10 +6,9 @@ import { SideMenu } from "../menu/SideMenu";
 
 export const UpdateRow = ({ match, location }) => {
   const history = useHistory();
-  let dataToUpdate = location.state;
-  console.warn("Data d", dataToUpdate);
   const [state, dispatch] = useContext(Context);
-  let paramUserId = match.params.id || 3;
+  let dataToUpdate = location.state;
+  let paramUserId = match.params.id || state.userId;
   const [userPref, setUserPref] = useState(dataToUpdate ? dataToUpdate : {});
   const handleChange = (evt) => {
     const name = evt.target.name;
@@ -45,19 +44,34 @@ export const UpdateRow = ({ match, location }) => {
                 <div style={{ display: "table-cell", paddingRight: "1rem" }}>
                   <b>Title</b>
                 </div>
-                <div style={{ display: "table-cell" }}>{userPref.title}</div>
+                <input
+                  name="title"
+                  style={{ display: "table-cell", width: "300px" }}
+                  defaultValue={userPref.title}
+                  onChange={handleChange}
+                />
               </div>
               <div style={{ display: "table-row" }}>
                 <div style={{ display: "table-cell", paddingRight: "1rem" }}>
                   <b>Media</b>
                 </div>
-                <div style={{ display: "table-cell" }}>{userPref.media}</div>
+                <input
+                  name="media"
+                  style={{ display: "table-cell", width: "300px" }}
+                  defaultValue={userPref.media}
+                  onChange={handleChange}
+                />
               </div>
               <div style={{ display: "table-row" }}>
                 <div style={{ display: "table-cell", paddingRight: "1rem" }}>
                   <b>Genre</b>
                 </div>
-                <div style={{ display: "table-cell" }}>{userPref.genre}</div>
+                <input
+                  name="genre"
+                  style={{ display: "table-cell", width: "300px" }}
+                  defaultValue={userPref.genre}
+                  onChange={handleChange}
+                />
               </div>
               <div style={{ display: "table-row" }}>
                 <div style={{ display: "table-cell", paddingRight: "1rem" }}>
