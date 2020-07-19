@@ -1,4 +1,4 @@
-ui/remote_start
+ui/remote_start.sh
 ui/.env
 whos_watching_exec
 ui/build/**
