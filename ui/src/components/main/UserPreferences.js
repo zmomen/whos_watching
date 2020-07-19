@@ -7,7 +7,7 @@ import { AddRow } from "./AddRow";
 
 export const UserPreferences = ({ match }) => {
   const [state, dispatch] = useContext(Context);
-  let paramUserId = match.params.id || state.userId;
+  let paramUserId = parseInt(match.params.id) || state.userId;
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
@@ -88,7 +88,6 @@ export const UserPreferences = ({ match }) => {
               {userPrefs
                 .filter((u) => u.status === "active")
                 .map((up, idx) => {
-                  console.warn("up data", up, idx);
                   return (
                     <tr
                       key={idx}
@@ -127,60 +126,62 @@ export const UserPreferences = ({ match }) => {
       </ul>
       <br />
       {/* showcomplete */}
-      <ul className={"menu"}>
-        <li>
-          <div
-            className="d-flex"
-            style={{ justifyContent: "space-between", alignItems: "center" }}
-          >
-            <div className="text-success">Completed shows</div>
-          </div>
-        </li>
-        <li className={"divider"}></li>
-        <li>
-          <table className="table table-hover">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Genre</th>
-                <th>Notes</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {userPrefs
-                .filter((m) => m.status === "complete")
-                .map((up, idx) => {
-                  return (
-                    <tr key={idx}>
-                      <td>{up.title}</td>
-                      <td>{up.media}</td>
-                      <td>{up.genre}</td>
-                      <td>{up.notes}</td>
-                      <td>
-                        <Link
-                          to={{
-                            pathname: `/users/${paramUserId}/preferences/${up.id}`,
-                            state: up,
-                          }}
-                        >
-                          <img
-                            className="c-hand"
-                            width="40"
-                            height="40"
-                            src="/images/icons/icon-edit.png"
-                            alt={"edit"}
-                          />
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </li>
-      </ul>
+      {userPrefs.some((m) => m.status === "complete") && (
+        <ul className={"menu"}>
+          <li>
+            <div
+              className="d-flex"
+              style={{ justifyContent: "space-between", alignItems: "center" }}
+            >
+              <div className="text-success">Completed Shows</div>
+            </div>
+          </li>
+          <li className={"divider"}></li>
+          <li>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Genre</th>
+                  <th>Notes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {userPrefs
+                  .filter((m) => m.status === "complete")
+                  .map((up, idx) => {
+                    return (
+                      <tr key={idx}>
+                        <td>{up.title}</td>
+                        <td>{up.media}</td>
+                        <td>{up.genre}</td>
+                        <td>{up.notes}</td>
+                        <td>
+                          <Link
+                            to={{
+                              pathname: `/users/${paramUserId}/preferences/${up.id}`,
+                              state: up,
+                            }}
+                          >
+                            <img
+                              className="c-hand"
+                              width="40"
+                              height="40"
+                              src="/images/icons/icon-edit.png"
+                              alt={"edit"}
+                            />
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

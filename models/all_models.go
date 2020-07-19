@@ -10,6 +10,7 @@ type UserPrefsModel struct {
 
 type UserPrefsModelRequest struct {
 	PrefID    int64  `json:"id"`
+	UserID    int64  `json:"userId"`
 	Status    string `json:"status"`
 	Notes     string `json:"notes"`
 	Priority  string `json:"priority"`

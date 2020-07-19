@@ -20,7 +20,7 @@ const (
 	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes, priority) " +
 		"VALUES (?, ?, ?, ?, ?) "
 
-	UpdateUserPref  = "UPDATE user_prefs SET status = ?, notes = ?, priority = ? where id = ? "
+	UpdateUserPref  = "UPDATE user_prefs SET status = ?, notes = ?, priority = ?, user_id = ? where id = ? "
 	DefaultStatus   = "active"
 	DefaultPriority = "low"
 )
@@ -108,7 +108,7 @@ func (u *UserPrefsService) GetSingleUserPreference(userId string, prefId string)
 
 func (u *UserPrefsService) UpdateUserPreference(userId string, prefId string, request models.UserPrefsModelRequest) models.UserPrefsModelRequest {
 	log.Println("Updating user prefs...")
-	_, err := u.database.Exec(UpdateUserPref, request.Status, request.Notes, request.Priority, prefId)
+	_, err := u.database.Exec(UpdateUserPref, request.Status, request.Notes, request.Priority, request.UserID, prefId)
 	if err != nil {
 		log.Panic(err.Error())
 	}

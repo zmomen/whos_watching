@@ -20,7 +20,7 @@ export const SideMenu = ({ users, currentUser }) => {
               <li key={idx} className={"menu-item"}>
                 <div
                   className={`${
-                    parseInt(selected) === user.id ? "selected-user" : ""
+                    selected === user.id ? "selected-user" : ""
                   } c-hand`}
                   onClick={() => changeSelected(user.id)}
                 >

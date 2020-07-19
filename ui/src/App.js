@@ -11,7 +11,7 @@ import Store from "./utils/Store";
 import { getAllUsers } from "./utils/api";
 
 const App = () => {
-  let DEFAULT_USER = 3;
+  const DEFAULT_USER = 3;
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllUsers()

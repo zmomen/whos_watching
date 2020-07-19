@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { updateUserPref } from "../../utils/api";
+import { getAllUsers, updateUserPref } from "../../utils/api";
 import { Context } from "../../utils/Store";
 
 export const UpdateRow = ({ match, location }) => {
   const history = useHistory();
   const [state, dispatch] = useContext(Context);
+  const [openUserSelection, setOpenUserSelection] = useState(false);
+  const [users, setUsers] = useState([]);
+
   let dataToUpdate = location.state;
-  let paramUserId = match.params.id || state.userId;
+  let paramUserId = parseInt(match.params.id) || state.userId;
   const [userPref, setUserPref] = useState(dataToUpdate ? dataToUpdate : {});
+  const [changedUser, setChangedUser] = useState(paramUserId);
   const handleChange = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
@@ -19,12 +23,21 @@ export const UpdateRow = ({ match, location }) => {
   };
 
   const handleUpdate = (row) => {
-    updateUserPref(paramUserId, row)
+    updateUserPref(paramUserId, row, changedUser)
       .then(({ data }) => {
         dispatch({ type: "GET_ALL_MEDIA" });
         history.push(`/users/${paramUserId}`);
       })
       .catch((err) => console.warn("error updating", err));
+  };
+
+  const handleChangeUser = () => {
+    getAllUsers()
+      .then(({ data }) => {
+        setUsers(data);
+      })
+      .catch((err) => console.warn("error", err));
+    setOpenUserSelection((prevState) => !prevState);
   };
 
   return (
@@ -143,6 +156,38 @@ export const UpdateRow = ({ match, location }) => {
             </span>
             <span style={{ paddingRight: ".25rem" }}>Low</span>
           </div>
+          <br />
+          <div
+            className="dropdown"
+            style={{ display: "table-row" }}
+            onClick={handleChangeUser}
+          >
+            <b className="c-hand">
+              Change User&nbsp;&nbsp;
+              <i
+                className={`${openUserSelection ? "arrow up" : "arrow down"}`}
+              ></i>
+            </b>
+          </div>
+          {openUserSelection &&
+            users.map((user, idx) => {
+              return (
+                <div
+                  key={idx}
+                  className="menu-item"
+                  style={{ display: "table-cell", paddingRight: "1rem" }}
+                >
+                  <div
+                    className={`${
+                      changedUser === user.id ? "selected-user" : ""
+                    } c-hand`}
+                    onClick={() => setChangedUser(user.id)}
+                  >
+                    {user.name}
+                  </div>
+                </div>
+              );
+            })}
           <div className="edit-buttons">
             <button
               name="Update"
