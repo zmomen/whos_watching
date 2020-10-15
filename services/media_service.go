@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	InsertMedia = "INSERT INTO media (title, media_type, genre, media_url) VALUES " +
-		"(?, ?, ?, ?) "
+	InsertMedia = "INSERT INTO media (title, media_type, genre, media_url, visible) VALUES " +
+		"(?, ?, ?, ?, true) "
 
 	SelectMedia = "SELECT title, media_type, genre, COALESCE(media_url, '') as media_url, visible FROM media ORDER BY RAND() "
 )
