@@ -28,6 +28,11 @@ ALTER TABLE
 ADD
   COLUMN media_url TEXT;
 
+ALTER TABLE
+  whos_watching.media
+ADD
+  COLUMN visible BOOLEAN;
+
 CREATE TABLE user_prefs (
   id INTEGER NOT NULL AUTO_INCREMENT,
   user_id INTEGER,

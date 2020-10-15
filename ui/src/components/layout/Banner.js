@@ -28,7 +28,7 @@ function Banner(props) {
 
   const updatedMedia = (state.media ? state.media : media).filter(
     (medium) => medium.mediaUrl !== ""
-  );
+  ).filter(m => m.visible === true);
 
   return (
     <div className="slide-container" style={{ height: "450px" }}>

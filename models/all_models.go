@@ -31,4 +31,5 @@ type MediaModel struct {
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
+	Visible   bool   `json:"visible"`
 }
