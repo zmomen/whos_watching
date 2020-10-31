@@ -32,3 +32,7 @@ export function updateUserPref(id, row, optionalNewId) {
 export function getAllMedia() {
   return instance.get(`/media`, config);
 }
+
+export function getNowPlaying() {
+  return instance.get(`/now-playing`, config);
+}

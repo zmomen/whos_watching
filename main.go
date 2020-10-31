@@ -28,6 +28,7 @@ func main() {
 	prefCtrlr := controllers.NewUserPrefsController(mysql)
 	userCtrlr := controllers.NewUserController(mysql)
 	mediaCtrlr := controllers.NewMediaController(mysql)
+	nowPlayingCtrlr := controllers.NewNowPlayingController(mysql)
 
 	router := mux.NewRouter()
 
@@ -39,6 +40,8 @@ func main() {
 	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.UpdateUserPrefHandler).Methods("PUT")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.CreateUserPrefHandler).Methods("POST")
 	router.HandleFunc("/media", mediaCtrlr.GetAllMediaHandler).Methods("GET")
+	router.HandleFunc("/now-playing", nowPlayingCtrlr.CreateNowPlayingHandler).Methods("POST")
+	router.HandleFunc("/now-playing", nowPlayingCtrlr.GetLatestNowPlayingHandler).Methods("GET")
 
 	//cors optionsGoes Below
 	corsOpts := cors.New(cors.Options{
@@ -55,6 +58,6 @@ func main() {
 		AllowedHeaders: []string{"*"},
 	})
 
-	log.Print("starting server...")
+	log.Print("starting server on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", corsOpts.Handler(router)))
 }

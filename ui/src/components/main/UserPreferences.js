@@ -48,7 +48,7 @@ export const UserPreferences = ({ match }) => {
             style={{ justifyContent: "space-between", alignItems: "center" }}
           >
             <div>
-              Currently Playing for <b>{userInfo && userInfo.name}</b>
+              Playlist for <b>{userInfo && userInfo.name}</b>
             </div>
             {isAdding ? (
               <img

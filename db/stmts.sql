@@ -54,3 +54,10 @@ ADD
   COLUMN priority text comment '';
 
 
+CREATE TABLE now_playing (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  user_pref_id INTEGER, 
+  date_added datetime,
+  PRIMARY KEY(id),
+  CONSTRAINT fk_user_pref FOREIGN KEY (user_pref_id) REFERENCES user_prefs(id)
+);

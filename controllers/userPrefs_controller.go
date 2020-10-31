@@ -53,7 +53,7 @@ func (c *UserPrefsController) CreateUserPrefHandler(w http.ResponseWriter, r *ht
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&request); err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		RespondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 	defer r.Body.Close()
@@ -75,7 +75,7 @@ func (c *UserPrefsController) UpdateUserPrefHandler(w http.ResponseWriter, r *ht
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&userPref); err != nil {
-		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		RespondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 	defer r.Body.Close()
@@ -90,7 +90,7 @@ func (c *UserPrefsController) UpdateUserPrefHandler(w http.ResponseWriter, r *ht
 	}
 }
 
-func respondWithError(w http.ResponseWriter, code int, message string) {
+func RespondWithError(w http.ResponseWriter, code int, message string) {
 	respondWithJSON(w, code, map[string]string{"error": message})
 }
 

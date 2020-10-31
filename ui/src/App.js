@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "spectre.css";
 import "./components/Common.css";
@@ -7,16 +7,24 @@ import Footer from "./components/layout/Footer";
 import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";
 import { SideMenu } from "./components/menu/SideMenu";
+import { NowPlaying } from "./components/menu/NowPlaying";
+import { getAllUsers, getNowPlaying } from "./utils/api";
 import Store from "./utils/Store";
-import { getAllUsers } from "./utils/api";
 
 const App = () => {
   const DEFAULT_USER = 3;
   const [users, setUsers] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState({});
   useEffect(() => {
     getAllUsers()
       .then(({ data }) => {
         setUsers(data);
+      })
+      .catch((err) => console.warn("error", err));
+
+    getNowPlaying()
+      .then(({ data }) => {
+        setNowPlaying(data);
       })
       .catch((err) => console.warn("error", err));
   }, []);
@@ -26,7 +34,11 @@ const App = () => {
         <Banner />
         <Router>
           <div className="d-flex">
-            <SideMenu users={users} currentUser={DEFAULT_USER} />
+            <div>
+              <SideMenu users={users} currentUser={DEFAULT_USER} />
+              <br />
+              <NowPlaying nowPlaying={nowPlaying} />
+            </div>
             <Switch>
               <Route path="/" component={UserPreferences} exact />
               <Route path="/users/:id" component={UserPreferences} exact />

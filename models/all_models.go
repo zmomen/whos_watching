@@ -33,3 +33,12 @@ type MediaModel struct {
 	MediaUrl  string `json:"mediaUrl"`
 	Visible   bool   `json:"visible"`
 }
+
+type NowPlayingModelRequest struct {
+	PrefID int64 `json:"userPrefId,omitempty"`
+}
+
+type NowPlayingModel struct {
+	Title string `json:"title"`
+	Name  string `json:"name,omitempty"`
+}
