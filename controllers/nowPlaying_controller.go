@@ -51,3 +51,13 @@ func (c *NowPlayingController) GetLatestNowPlayingHandler(w http.ResponseWriter,
 		log.Printf("error encoding json")
 	}
 }
+
+func (c *NowPlayingController) GetPreferencesToUpdateNowPlayingHandler(w http.ResponseWriter, r *http.Request) {
+	response := c.nps.GetPreferencesToUpdateNowPlaying()
+
+	log.Println(r.Method, r.URL.String())
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Printf("error encoding json")
+	}
+}

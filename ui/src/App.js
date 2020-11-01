@@ -4,27 +4,21 @@ import "spectre.css";
 import "./components/Common.css";
 import Banner from "./components/layout/Banner";
 import Footer from "./components/layout/Footer";
+import { NowPlayingPage } from "./components/main/NowPlayingPage";
 import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";
+import { NowPlayingMenu } from "./components/menu/NowPlayingMenu";
 import { SideMenu } from "./components/menu/SideMenu";
-import { NowPlaying } from "./components/menu/NowPlaying";
-import { getAllUsers, getNowPlaying } from "./utils/api";
+import { getAllUsers } from "./utils/api";
 import Store from "./utils/Store";
 
 const App = () => {
   const DEFAULT_USER = 3;
   const [users, setUsers] = useState([]);
-  const [nowPlaying, setNowPlaying] = useState({});
   useEffect(() => {
     getAllUsers()
       .then(({ data }) => {
         setUsers(data);
-      })
-      .catch((err) => console.warn("error", err));
-
-    getNowPlaying()
-      .then(({ data }) => {
-        setNowPlaying(data);
       })
       .catch((err) => console.warn("error", err));
   }, []);
@@ -37,7 +31,7 @@ const App = () => {
             <div>
               <SideMenu users={users} currentUser={DEFAULT_USER} />
               <br />
-              <NowPlaying nowPlaying={nowPlaying} />
+              <NowPlayingMenu />
             </div>
             <Switch>
               <Route path="/" component={UserPreferences} exact />
@@ -47,6 +41,7 @@ const App = () => {
                 component={UpdateRow}
                 exact
               />
+              <Route path="/now-playing" component={NowPlayingPage} exact />
             </Switch>
           </div>
         </Router>

@@ -39,6 +39,7 @@ type NowPlayingModelRequest struct {
 }
 
 type NowPlayingModel struct {
-	Title string `json:"title"`
-	Name  string `json:"name,omitempty"`
+	PrefID int64  `json:"userPrefId,omitempty"`
+	Title  string `json:"title"`
+	Name   string `json:"name,omitempty"`
 }

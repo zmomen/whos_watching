@@ -64,3 +64,8 @@
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
+
+.recommended-by {
+  font-size: 10pt;
+  color: gray;
+}

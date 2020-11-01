@@ -36,3 +36,11 @@ export function getAllMedia() {
 export function getNowPlaying() {
   return instance.get(`/now-playing`, config);
 }
+
+export function addNowPlaying(data) {
+  return instance.post(`/now-playing`, data, config);
+}
+
+export function getPreferencesToUpdateNowPlaying() {
+  return instance.get(`/now-playing/all-preferences`, config);
+}
