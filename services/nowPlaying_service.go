@@ -15,7 +15,8 @@ const (
 
 	SelectToUpdateNowPlaying = "SELECT up.id, m.title, u.name " +
 		"FROM user_prefs up INNER JOIN media m ON up.media_id = m.id " +
-		"INNER JOIN users u ON up.user_id = u.id "
+		"INNER JOIN users u ON up.user_id = u.id " + 
+		"WHERE up.status = 'active' "
 
 	InsertNowPlaying = "INSERT INTO now_playing (user_pref_id, date_added) " +
 		"VALUES (?, now()) "
