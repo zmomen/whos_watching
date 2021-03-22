@@ -8,6 +8,8 @@ var instance = axios.create({
   baseURL: "http://" + process.env.REACT_APP_IPP + ":8080",
 });
 
+console.warn(process.env.REACT_APP_IPP, "iphere");
+
 export function getAllUsers() {
   return instance.get(`/users`, config);
 }
