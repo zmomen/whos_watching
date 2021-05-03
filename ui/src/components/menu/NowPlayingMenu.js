@@ -7,7 +7,6 @@ import "../Common.css";
 export const NowPlayingMenu = () => {
   const [state] = useContext(Context);
   const history = useHistory();
-  console.warn("what my stat", state);
   const [nowPlaying, setNowPlaying] = useState({});
   useEffect(() => {
     getNowPlaying()

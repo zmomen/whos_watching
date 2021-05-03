@@ -121,7 +121,18 @@ export const UpdateRow = ({ match, location }) => {
             </div>
             <div style={{ display: "table-row" }}>
               <div style={{ display: "table-cell", paddingRight: "1rem" }}>
-                <b>Notes</b>
+                <b>Platform</b>
+              </div>
+              <input
+                name="platform"
+                style={{ display: "table-cell", width: "300px" }}
+                defaultValue={userPref.platform}
+                onChange={handleChange}
+              />
+            </div>
+            <div style={{ display: "table-row" }}>
+              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+                <b>Reviews / Notes</b>
               </div>
               <input
                 name="notes"

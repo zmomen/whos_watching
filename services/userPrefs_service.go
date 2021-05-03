@@ -7,7 +7,9 @@ import (
 )
 
 const (
-	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, up.status, up.notes, m.media_url, up.priority " +
+	SelectUserPrefs = "SELECT up.id, m.title, m.media_type, m.genre, " +
+	    "COALESCE(m.platform, '') as platform, " +
+	    "up.status, up.notes, m.media_url, up.priority " +
 		"from users u " +
 		"inner join user_prefs up on u.id = up.user_id " +
 		"inner join media m on m.id = up.media_id where u.id = ?"
@@ -59,6 +61,7 @@ func (u *UserPrefsService) AddUserPref(userId string, request models.UserPrefsMo
 			MediaType: request.MediaType,
 			Genre:     request.Genre,
 			MediaUrl:  request.MediaUrl,
+			Platform:  request.Platform,
 		}
 		log.Println("User pref added!")
 	} else {
@@ -80,7 +83,9 @@ func (u *UserPrefsService) GetUserPrefs(userId string) []models.UserPrefsModelRe
 	var prefArry = make([]models.UserPrefsModelRequest, 0)
 
 	for res.Next() {
-		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, &pref.Status, &pref.Notes, &pref.MediaUrl, &pref.Priority)
+		err = res.Scan(&pref.PrefID, &pref.Title, &pref.MediaType, &pref.Genre, 
+			&pref.Platform, &pref.Status, &pref.Notes, 
+			&pref.MediaUrl, &pref.Priority)
 		if err != nil {
 			log.Panic(err.Error()) // proper error handling instead of panic in your app
 		}

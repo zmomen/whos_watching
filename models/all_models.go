@@ -18,6 +18,7 @@ type UserPrefsModelRequest struct {
 	MediaType string `json:"media"`
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
+	Platform  string `json:"platform"`
 }
 
 type UserModel struct {
@@ -32,6 +33,7 @@ type MediaModel struct {
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
 	Visible   bool   `json:"visible"`
+	Platform   string   `json:"platform"`
 }
 
 type NowPlayingModelRequest struct {

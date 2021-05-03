@@ -1,3 +1,6 @@
+.table td { 
+  padding: 0px 2px;
+}
 .banner {
   margin: 1rem;
   display: flex;

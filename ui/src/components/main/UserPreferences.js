@@ -118,8 +118,8 @@ export const UserPreferences = ({ match }) => {
               <img
                 className="c-hand"
                 onClick={() => setIsAdding((prevState) => !prevState)}
-                width="40"
-                height="40"
+                width="25"
+                height="25"
                 src="/images/icons/icon-minus.png"
                 alt={"close"}
               />
@@ -144,7 +144,7 @@ export const UserPreferences = ({ match }) => {
                 <th onClick={() => sortTable(0)}>Title</th>
                 <th onClick={() => sortTable(1)}>Type</th>
                 <th onClick={() => sortTable(2)}>Genre</th>
-                <th onClick={() => sortTable(3)}>Notes</th>
+                <th onClick={() => sortTable(3)}>Platform</th>
                 <th></th>
               </tr>
             </thead>
@@ -164,7 +164,7 @@ export const UserPreferences = ({ match }) => {
                       <td>{up.title}</td>
                       <td>{up.media}</td>
                       <td>{up.genre}</td>
-                      <td>{up.notes}</td>
+                      <td>{up.platform}</td>
                       <td>
                         <Link
                           to={{
@@ -174,8 +174,8 @@ export const UserPreferences = ({ match }) => {
                         >
                           <img
                             className="c-hand"
-                            width="40"
-                            height="40"
+                            width="25"
+                            height="25"
                             src="/images/icons/icon-edit.png"
                             alt={"edit"}
                           />
@@ -208,7 +208,7 @@ export const UserPreferences = ({ match }) => {
                   <th>Title</th>
                   <th>Type</th>
                   <th>Genre</th>
-                  <th>Notes</th>
+                  <th>Reviews</th>
                   <th></th>
                 </tr>
               </thead>
@@ -231,8 +231,8 @@ export const UserPreferences = ({ match }) => {
                           >
                             <img
                               className="c-hand"
-                              width="40"
-                              height="40"
+                              width="20"
+                              height="20"
                               src="/images/icons/icon-edit.png"
                               alt={"edit"}
                             />
