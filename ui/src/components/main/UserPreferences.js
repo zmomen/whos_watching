@@ -145,6 +145,7 @@ export const UserPreferences = ({ match }) => {
                 <th onClick={() => sortTable(1)}>Type</th>
                 <th onClick={() => sortTable(2)}>Genre</th>
                 <th onClick={() => sortTable(3)}>Platform</th>
+                <th onClick={() => sortTable(3)}>Reviews / Notes</th>
                 <th></th>
               </tr>
             </thead>
@@ -165,6 +166,7 @@ export const UserPreferences = ({ match }) => {
                       <td>{up.media}</td>
                       <td>{up.genre}</td>
                       <td>{up.platform}</td>
+                      <td>{up.notes}</td>
                       <td>
                         <Link
                           to={{
