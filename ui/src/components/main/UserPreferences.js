@@ -118,8 +118,8 @@ export const UserPreferences = ({ match }) => {
               <img
                 className="c-hand"
                 onClick={() => setIsAdding((prevState) => !prevState)}
-                width="25"
-                height="25"
+                width="40"
+                height="40"
                 src="/images/icons/icon-minus.png"
                 alt={"close"}
               />
