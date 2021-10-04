@@ -7,6 +7,7 @@ export const AddRow = ({ handleAdd }) => {
     genre: "",
     mediaUrl: "",
     platform: "",
+    notes: "",
   };
   const [rowData, setRowData] = useState(initialState);
   const [errors, setErrors] = useState(false);
@@ -88,6 +89,18 @@ export const AddRow = ({ handleAdd }) => {
                 type="text"
                 name="platform"
                 value={rowData.platform}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <label>
+                Reviews / Notes
+                <br />
+              </label>
+              <input
+                type="text"
+                name="notes"
+                value={rowData.notes}
                 onChange={handleChange}
               />
             </td>
