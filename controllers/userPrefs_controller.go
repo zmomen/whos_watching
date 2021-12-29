@@ -25,7 +25,7 @@ func NewUserPrefsController(db *sql.DB) *UserPrefsController {
 
 func (c *UserPrefsController) GetSingleUserPrefHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	response := c.ups.GetSingleUserPreference(vars["id"], vars["prefId"],)
+	response := c.ups.GetSingleUserPreference(vars["id"], vars["prefId"])
 
 	log.Println(r.Method, r.URL.String())
 	w.WriteHeader(http.StatusOK)

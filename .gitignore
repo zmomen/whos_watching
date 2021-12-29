@@ -2,6 +2,8 @@ ui/remote_start.sh
 ui/.env
 whos_watching_exec
 ui/build/**
+db/mysql_data
+*.sql
 
 db/config.json
 nohup.out

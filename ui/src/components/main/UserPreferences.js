@@ -39,6 +39,16 @@ export const UserPreferences = ({ match }) => {
       .catch((err) => console.warn("error adding", err));
   };
 
+  const handleDelete = (mediaId) => {
+    api
+      .deleteMediaById(mediaId)
+      .then(() => {
+        setUserPrefs(prevState => prevState.filter(pref => pref.mediaId !== mediaId))
+        dispatch({ type: "GET_ALL_MEDIA" });
+      })
+      .catch((err) => console.warn("error deleting", err));
+  };
+
 
   function sortTable(n) {
     var table,
@@ -146,7 +156,8 @@ export const UserPreferences = ({ match }) => {
                 <th onClick={() => sortTable(2)}>Genre</th>
                 <th onClick={() => sortTable(3)}>Platform</th>
                 <th onClick={() => sortTable(3)}>Reviews / Notes</th>
-                <th></th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -156,14 +167,13 @@ export const UserPreferences = ({ match }) => {
                   return (
                     <tr
                       key={idx}
-                      className={`${
-                        up.priority === "high"
-                          ? "priority-high"
-                          : "priority-low"
-                      }`}
+                      className={`${up.priority === "high"
+                        ? "priority-high"
+                        : "priority-low"
+                        }`}
                     >
                       <td>{up.title}</td>
-                      <td>{up.media}</td>
+                      <td>{up.mediaType}</td>
                       <td>{up.genre}</td>
                       <td>{up.platform}</td>
                       <td>{up.notes}</td>
@@ -176,12 +186,21 @@ export const UserPreferences = ({ match }) => {
                         >
                           <img
                             className="c-hand"
-                            width="25"
-                            height="25"
+                            width="20"
+                            height="20"
                             src="/images/icons/icon-edit.png"
                             alt={"edit"}
                           />
                         </Link>
+                      </td>
+                      <td>
+                        <img onClick={() => handleDelete(up.mediaId)}
+                          className="c-hand"
+                          width="20"
+                          height="20"
+                          src="/images/icons/icon-delete.png"
+                          alt={"delete"}
+                        />
                       </td>
                     </tr>
                   );
@@ -211,7 +230,7 @@ export const UserPreferences = ({ match }) => {
                   <th>Type</th>
                   <th>Genre</th>
                   <th>Reviews</th>
-                  <th></th>
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -221,7 +240,7 @@ export const UserPreferences = ({ match }) => {
                     return (
                       <tr key={idx}>
                         <td>{up.title}</td>
-                        <td>{up.media}</td>
+                        <td>{up.mediaType}</td>
                         <td>{up.genre}</td>
                         <td>{up.notes}</td>
                         <td>
@@ -233,8 +252,8 @@ export const UserPreferences = ({ match }) => {
                           >
                             <img
                               className="c-hand"
-                              width="20"
-                              height="20"
+                              width="15"
+                              height="15"
                               src="/images/icons/icon-edit.png"
                               alt={"edit"}
                             />

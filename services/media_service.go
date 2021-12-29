@@ -14,6 +14,8 @@ const (
 		"COALESCE(media_url, '') as media_url, visible, " +
 		"COALESCE(platform, '') as platform " +
 		"FROM media ORDER BY RAND() "
+	
+	DeleteMedia = "DELETE FROM media where id = ? "
 )
 
 type MediaService struct {
@@ -54,6 +56,14 @@ func (m *MediaService) AddMedia(request models.UserPrefsModelRequest) int64 {
 	log.Println("media added!")
 	newId, _ := res.LastInsertId()
 	return newId
+}
+
+func (m *MediaService) DeleteMedia(mediaId string) {
+	_, err := m.database.Exec(DeleteMedia, mediaId)
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	log.Println("media Deleted!")
 }
 
 func (m *MediaService) UpdateMedia(request models.UserPrefsModelRequest, mediaId string) int64 {

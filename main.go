@@ -40,6 +40,7 @@ func main() {
 	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.UpdateUserPrefHandler).Methods("PUT")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.CreateUserPrefHandler).Methods("POST")
 	router.HandleFunc("/media", mediaCtrlr.GetAllMediaHandler).Methods("GET")
+	router.HandleFunc("/media/{mediaId}", mediaCtrlr.DeleteMediaByIdHandler).Methods("DELETE")
 	router.HandleFunc("/now-playing", nowPlayingCtrlr.CreateNowPlayingHandler).Methods("POST")
 	router.HandleFunc("/now-playing", nowPlayingCtrlr.GetLatestNowPlayingHandler).Methods("GET")
 	router.HandleFunc("/now-playing/all-preferences", nowPlayingCtrlr.GetPreferencesToUpdateNowPlayingHandler).Methods("GET")

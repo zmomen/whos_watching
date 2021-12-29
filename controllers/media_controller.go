@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	services "whos_watching/services"
+
+	"github.com/gorilla/mux"
 )
 
 type MediaController struct {
@@ -28,4 +30,11 @@ func (c *MediaController) GetAllMediaHandler(w http.ResponseWriter, r *http.Requ
 	if err != nil {
 		log.Printf("error encoding json")
 	}
+}
+
+func (c *MediaController) DeleteMediaByIdHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	c.ms.DeleteMedia(vars["mediaId"])
+	log.Println(r.Method, r.URL.String())
+	w.WriteHeader(http.StatusNoContent)
 }

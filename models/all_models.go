@@ -11,11 +11,12 @@ type UserPrefsModel struct {
 type UserPrefsModelRequest struct {
 	PrefID    int64  `json:"id"`
 	UserID    int64  `json:"userId"`
+	MediaID   int64  `json:"mediaId"`
 	Status    string `json:"status"`
 	Notes     string `json:"notes"`
 	Priority  string `json:"priority"`
 	Title     string `json:"title"`
-	MediaType string `json:"media"`
+	MediaType string `json:"mediaType"`
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
 	Platform  string `json:"platform"`
@@ -33,7 +34,7 @@ type MediaModel struct {
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
 	Visible   bool   `json:"visible"`
-	Platform   string   `json:"platform"`
+	Platform  string `json:"platform"`
 }
 
 type NowPlayingModelRequest struct {

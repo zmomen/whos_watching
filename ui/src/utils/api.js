@@ -46,3 +46,7 @@ export function addNowPlaying(data) {
 export function getPreferencesToUpdateNowPlaying() {
   return instance.get(`/now-playing/all-preferences`, config);
 }
+
+export function deleteMediaById(mediaId) {
+  return instance.delete(`/media/${mediaId}`, config);
+}
