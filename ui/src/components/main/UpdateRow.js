@@ -66,9 +66,9 @@ export const UpdateRow = ({ match, location }) => {
                 <b>Media</b>
               </div>
               <input
-                name="media"
+                name="mediaType"
                 style={{ display: "table-cell", width: "300px" }}
-                defaultValue={userPref.media}
+                defaultValue={userPref.mediaType}
                 onChange={handleChange}
               />
             </div>

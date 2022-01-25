@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const AddRow = ({ handleAdd }) => {
   const initialState = {
     title: "",
-    media: "",
+    mediaType: "",
     genre: "",
     mediaUrl: "",
     platform: "",
@@ -49,8 +49,8 @@ export const AddRow = ({ handleAdd }) => {
               </label>
               <input
                 type="text"
-                name="media"
-                value={rowData.media}
+                name="mediaType"
+                value={rowData.mediaType}
                 onChange={handleChange}
               />
             </td>
