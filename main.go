@@ -37,6 +37,7 @@ func main() {
 	router.HandleFunc("/users/{id}", userCtrlr.GetUserHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.GetUserPrefsHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.GetSingleUserPrefHandler).Methods("GET")
+	router.HandleFunc("/latest-reviews", prefCtrlr.GetLatestReviewsHandler).Methods("GET")
 	router.HandleFunc("/users/{id}/preferences/{prefId}", prefCtrlr.UpdateUserPrefHandler).Methods("PUT")
 	router.HandleFunc("/users/{id}/preferences", prefCtrlr.CreateUserPrefHandler).Methods("POST")
 	router.HandleFunc("/media", mediaCtrlr.GetAllMediaHandler).Methods("GET")

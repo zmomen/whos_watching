@@ -22,7 +22,14 @@ const (
 	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes, priority) " +
 		"VALUES (?, ?, ?, ?, ?) "
 
-	UpdateUserPref  = "UPDATE user_prefs SET status = ?, notes = ?, priority = ?, user_id = ? where id = ? "
+	UpdateUserPref = "UPDATE user_prefs SET status = ?, notes = ?, priority = ?, user_id = ?, updated_at = now where id = ? "
+
+	SelectLatestReviews = "SELECT m.title, m.media_type, m.genre, COALESCE(m.platform, '') as platform, " +
+		"up.priority, up.notes " +
+		"from users u inner join user_prefs up on u.id = up.user_id " +
+		"inner join media m on m.id = up.media_id where up.status = 'complete' " +
+		"order by up.updated_at desc limit 5"
+
 	DefaultStatus   = "active"
 	DefaultPriority = "low"
 )
@@ -127,4 +134,23 @@ func (u *UserPrefsService) UpdateUserPreference(userId string, prefId string, re
 		log.Panicln("Error! Failed to update user pref...")
 	}
 	return request
+}
+
+func (u *UserPrefsService) GetLatestReviews() []models.LatestReviews {
+	res, err := u.database.Query(SelectLatestReviews)
+
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	var reviews models.LatestReviews
+	var reviewsArry = make([]models.LatestReviews, 0)
+
+	for res.Next() {
+		err = res.Scan(&reviews.Title, &reviews.MediaType, &reviews.Genre, &reviews.Platform, &reviews.Priority, &reviews.Notes)
+		if err != nil {
+			log.Panic(err.Error()) // proper error handling instead of panic in your app
+		}
+		reviewsArry = append(reviewsArry, reviews)
+	}
+	return reviewsArry
 }

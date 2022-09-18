@@ -90,6 +90,17 @@ func (c *UserPrefsController) UpdateUserPrefHandler(w http.ResponseWriter, r *ht
 	}
 }
 
+func (c *UserPrefsController) GetLatestReviewsHandler(w http.ResponseWriter, r *http.Request) {
+	response := c.ups.GetLatestReviews()
+
+	log.Println(r.Method, r.URL.String())
+	w.WriteHeader(http.StatusOK)
+	err := json.NewEncoder(w).Encode(response)
+	if err != nil {
+		log.Printf("error encoding json")
+	}
+}
+
 func RespondWithError(w http.ResponseWriter, code int, message string) {
 	respondWithJSON(w, code, map[string]string{"error": message})
 }

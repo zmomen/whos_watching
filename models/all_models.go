@@ -46,3 +46,12 @@ type NowPlayingModel struct {
 	Title  string `json:"title"`
 	Name   string `json:"name,omitempty"`
 }
+
+type LatestReviews struct {
+	Title     string `json:"title"`
+	MediaType string `json:"mediaType"`
+	Genre     string `json:"genre"`
+	Platform  string `json:"platform"`
+	Priority  string `json:"priority"`
+	Notes     string `json:"notes"`
+}
