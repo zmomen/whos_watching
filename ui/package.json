@@ -8,9 +8,10 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
-    "react-slideshow-image": "^2.0.1",
+    "react-slick": "^0.29.0",
     "reactjs-popup": "^1.5.0",
     "serve": "^11.3.1",
+    "slick-carousel": "^1.8.1",
     "spectre.css": "^0.5.8"
   },
   "scripts": {

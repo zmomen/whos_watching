@@ -50,3 +50,7 @@ export function getPreferencesToUpdateNowPlaying() {
 export function deleteMediaById(mediaId) {
   return instance.delete(`/media/${mediaId}`, config);
 }
+
+export function getLatestReviews() {
+  return instance.get(`/latest-reviews`, config);
+}

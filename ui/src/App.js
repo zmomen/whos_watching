@@ -4,6 +4,7 @@ import "spectre.css";
 import "./components/Common.css";
 import Banner from "./components/layout/Banner";
 import Footer from "./components/layout/Footer";
+import LatestReviews from "./components/main/LatestReviews";
 import { NowPlayingPage } from "./components/main/NowPlayingPage";
 import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";

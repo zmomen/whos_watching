@@ -4,6 +4,7 @@ import * as api from "../../utils/api";
 import { Context } from "../../utils/Store";
 import "../Common.css";
 import { AddRow } from "./AddRow";
+import LatestReviews from "./LatestReviews";
 
 export const UserPreferences = ({ match }) => {
   const [state, dispatch] = useContext(Context);
@@ -117,6 +118,9 @@ export const UserPreferences = ({ match }) => {
     <div className="main-body">
       <ul className={"menu"}>
         <li>
+          <p>
+            <LatestReviews />
+          </p>
           <div
             className="d-flex"
             style={{ justifyContent: "space-between", alignItems: "center" }}
