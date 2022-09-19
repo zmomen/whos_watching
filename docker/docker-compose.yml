@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:8.0.22
-    platform: linux/x86_64
+    platform: linux/amd64
     container_name: mysqldb
     restart: always
     ports:
@@ -11,3 +11,4 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=whos_watching
+      - secure-file-priv=/
