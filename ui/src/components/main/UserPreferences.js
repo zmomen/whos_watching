@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import * as api from "../../utils/api";
 import { Context } from "../../utils/Store";
 import "../Common.css";
 import { AddRow } from "./AddRow";
 import LatestReviews from "./LatestReviews";
 
-export const UserPreferences = ({ match = "" }) => {
+export const UserPreferences = () => {
+  let {id} = useParams(); 
+
   const [state, dispatch] = useContext(Context);
-  let paramUserId = parseInt(match?.params?.id) || state.userId;
+  let paramUserId = id || state.userId;
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
