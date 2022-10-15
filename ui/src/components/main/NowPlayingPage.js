@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   addNowPlaying,
   getPreferencesToUpdateNowPlaying
@@ -8,7 +8,7 @@ import { Context } from "../../utils/Store";
 
 export const NowPlayingPage = () => {
   const [, dispatch] = useContext(Context);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [currentPrefs, setCurrentPrefs] = useState([]);
   const [updatedNowPlaying, setUpdatedNowPlaying] = useState();
 
@@ -23,7 +23,7 @@ export const NowPlayingPage = () => {
   const handleUpdate = () => {
     addNowPlaying({ userPrefId: parseInt(updatedNowPlaying) });
     dispatch({ type: "GET_NOW_PLAYING" });
-    history.push("/");
+    navigate("/");
   };
   return (
     <div className="main-body">

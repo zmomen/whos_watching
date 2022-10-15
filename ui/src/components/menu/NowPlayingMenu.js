@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory, withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getNowPlaying } from "../../utils/api";
 import { Context } from "../../utils/Store";
 import "../Common.css";
 
 export const NowPlayingMenu = () => {
   const [state] = useContext(Context);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [nowPlaying, setNowPlaying] = useState({});
   useEffect(() => {
     getNowPlaying()
@@ -32,7 +32,7 @@ export const NowPlayingMenu = () => {
             className="btn btn-secondary"
             onClick={(e) => {
               e.preventDefault();
-              history.push("/now-playing");
+              navigate("/now-playing");
             }}
           >
             Update
@@ -43,4 +43,4 @@ export const NowPlayingMenu = () => {
   );
 };
 
-export default withRouter(NowPlayingMenu);
+export default NowPlayingMenu;

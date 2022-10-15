@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "spectre.css";
 import "./components/Common.css";
 import Banner from "./components/layout/Banner";
 import Footer from "./components/layout/Footer";
-import LatestReviews from "./components/main/LatestReviews";
 import { NowPlayingPage } from "./components/main/NowPlayingPage";
 import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";
@@ -34,16 +33,16 @@ const App = () => {
               <br />
               <NowPlayingMenu />
             </div>
-            <Switch>
-              <Route path="/" component={UserPreferences} exact />
-              <Route path="/users/:id" component={UserPreferences} exact />
+            <Routes>
+              <Route path="/" element={<UserPreferences/>} exact />
+              <Route path="/users/:id" element={<UserPreferences/>} exact />
               <Route
                 path={"/users/:id/preferences/:prefId"}
-                component={UpdateRow}
+                element={UpdateRow}
                 exact
               />
-              <Route path="/now-playing" component={NowPlayingPage} exact />
-            </Switch>
+              <Route path="/now-playing" element={NowPlayingPage} exact />
+            </Routes>
           </div>
         </Router>
       </div>

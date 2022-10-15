@@ -6,9 +6,9 @@ import "../Common.css";
 import { AddRow } from "./AddRow";
 import LatestReviews from "./LatestReviews";
 
-export const UserPreferences = ({ match }) => {
+export const UserPreferences = ({ match = "" }) => {
   const [state, dispatch] = useContext(Context);
-  let paramUserId = parseInt(match.params.id) || state.userId;
+  let paramUserId = parseInt(match?.params?.id) || state.userId;
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
@@ -118,9 +118,9 @@ export const UserPreferences = ({ match }) => {
     <div className="main-body">
       <ul className={"menu"}>
         <li>
-          <p>
+          <div>
             <LatestReviews />
-          </p>
+          </div>
           <div
             className="d-flex"
             style={{ justifyContent: "space-between", alignItems: "center" }}

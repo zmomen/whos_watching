@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllUsers, updateUserPref } from "../../utils/api";
 import { Context } from "../../utils/Store";
 
 export const UpdateRow = ({ match, location }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [state, dispatch] = useContext(Context);
   const [openUserSelection, setOpenUserSelection] = useState(false);
   const [users, setUsers] = useState([]);
@@ -26,7 +26,7 @@ export const UpdateRow = ({ match, location }) => {
     updateUserPref(paramUserId, row, changedUser)
       .then(({ data }) => {
         dispatch({ type: "GET_ALL_MEDIA" });
-        history.push(`/users/${paramUserId}`);
+        navigate(`/users/${paramUserId}`);
       })
       .catch((err) => console.warn("error updating", err));
   };

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../Common.css";
 
 export const SideMenu = ({ users, currentUser }) => {
   const [selected, setSelected] = useState(currentUser);
-  const history = useHistory();
+  const navigate = useNavigate();
   const changeSelected = (id) => {
     setSelected(id);
-    history.push(`/users/${id}`);
+    navigate(`/users/${id}`);
   };
   return (
     <div>
