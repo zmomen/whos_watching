@@ -41,7 +41,7 @@ const App = () => {
                 element={UpdateRow}
                 exact
               />
-              <Route path="/now-playing" element={NowPlayingPage} exact />
+              <Route path="/now-playing" element={<NowPlayingPage/>} exact />
             </Routes>
           </div>
         </Router>
