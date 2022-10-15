@@ -1,4 +1,4 @@
-import { getAllMedia, getNowPlaying } from "./api";
+import { getNowPlaying } from "./api";
 
 const Reducer = (state, action) => {
   switch (action.type) {
@@ -6,17 +6,6 @@ const Reducer = (state, action) => {
       return {
         ...state,
         userId: action.payload,
-      };
-    case "GET_ALL_MEDIA":
-      let mediaData = null;
-      getAllMedia()
-        .then(({ data }) => {
-          mediaData = data;
-        })
-        .catch((err) => console.warn("dispatch err", err));
-      return {
-        ...state,
-        media: mediaData,
       };
     case "GET_NOW_PLAYING":
       let nowPlaying = null;

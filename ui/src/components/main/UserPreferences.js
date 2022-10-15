@@ -37,7 +37,6 @@ export const UserPreferences = () => {
       .addUserPref(paramUserId, row)
       .then(({ data }) => {
         setUserPrefs(userPrefs.concat(data));
-        dispatch({ type: "GET_ALL_MEDIA" });
       })
       .catch((err) => console.warn("error adding", err));
   };
@@ -47,7 +46,6 @@ export const UserPreferences = () => {
       .deleteMediaById(mediaId)
       .then(() => {
         setUserPrefs(prevState => prevState.filter(pref => pref.mediaId !== mediaId))
-        dispatch({ type: "GET_ALL_MEDIA" });
       })
       .catch((err) => console.warn("error deleting", err));
   };

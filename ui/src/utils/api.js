@@ -29,10 +29,6 @@ export function updateUserPref(id, row, optionalNewId) {
   return instance.put(`/users/${id}/preferences/${row.id}`, data, config);
 }
 
-export function getAllMedia() {
-  return instance.get(`/media`, config);
-}
-
 export function getNowPlaying() {
   return instance.get(`/now-playing`, config);
 }
