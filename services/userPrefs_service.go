@@ -22,13 +22,13 @@ const (
 	InsertUserPref = "INSERT INTO user_prefs (user_id, media_id, status, notes, priority) " +
 		"VALUES (?, ?, ?, ?, ?) "
 
-	UpdateUserPref = "UPDATE user_prefs SET status = ?, notes = ?, priority = ?, user_id = ?, updated_at = now where id = ? "
+	UpdateUserPref = "UPDATE user_prefs SET status = ?, notes = ?, priority = ?, user_id = ?, updated_at = now() where id = ? "
 
 	SelectLatestReviews = "SELECT m.title, m.media_type, m.genre, COALESCE(m.platform, '') as platform, " +
 		"up.priority, up.notes " +
 		"from users u inner join user_prefs up on u.id = up.user_id " +
 		"inner join media m on m.id = up.media_id where up.status = 'complete' " +
-		"order by up.updated_at desc limit 5"
+		"order by up.updated_at desc"
 
 	DefaultStatus   = "active"
 	DefaultPriority = "low"
