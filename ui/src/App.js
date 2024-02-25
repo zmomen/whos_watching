@@ -24,7 +24,7 @@ const App = () => {
   }, []);
   return (
     <Store>
-      <div className={"container grid-lg black"}>
+      <div className={"container grid-xl black"}>
         <Banner />
         <Router>
           <div className="d-flex">
