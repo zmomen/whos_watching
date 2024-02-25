@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import * as api from "../../utils/api";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../../utils/Store";
+import * as api from "../../utils/api";
 import "../Common.css";
 import { AddRow } from "./AddRow";
 import LatestReviews from "./LatestReviews";
 
 export const UserPreferences = () => {
-  let {id} = useParams(); 
+  let { id } = useParams();
 
   const [state, dispatch] = useContext(Context);
   let paramUserId = id || state.userId;
@@ -114,6 +114,13 @@ export const UserPreferences = () => {
     }
   }
 
+  function fixDate(someDate) {
+    let parsed = new Date(Date.parse(someDate));
+    var timeOffsetInMS = parsed.getTimezoneOffset() * 60000;
+    parsed.setTime(parsed.getTime() - timeOffsetInMS);
+    return new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeZone: 'America/Chicago', timeStyle: 'short' }).format(parsed)
+  }
+
   return (
     <div className="main-body">
       <ul className={"menu"}>
@@ -160,6 +167,7 @@ export const UserPreferences = () => {
                 <th onClick={() => sortTable(2)}>Genre</th>
                 <th onClick={() => sortTable(3)}>Platform</th>
                 <th onClick={() => sortTable(3)}>Reviews / Notes</th>
+                <th onClick={() => sortTable(5)}>Updated</th>
                 <th>Edit</th>
                 <th>Remove</th>
               </tr>
@@ -181,12 +189,11 @@ export const UserPreferences = () => {
                       <td>{up.genre}</td>
                       <td>{up.platform}</td>
                       <td>{up.notes}</td>
+                      <td>{fixDate(up.updatedAt)}</td>
                       <td>
                         <Link
-                          to={{
-                            pathname: `/users/${paramUserId}/preferences/${up.id}`,
-                            state: up,
-                          }}
+                          to={`/users/${paramUserId}/preferences/${up.id}`}
+                          state={up}
                         >
                           <img
                             className="c-hand"
@@ -234,6 +241,7 @@ export const UserPreferences = () => {
                   <th>Type</th>
                   <th>Genre</th>
                   <th>Reviews</th>
+                  <th>Updated</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -247,12 +255,11 @@ export const UserPreferences = () => {
                         <td>{up.mediaType}</td>
                         <td>{up.genre}</td>
                         <td>{up.notes}</td>
+                        <td>{fixDate(up.updatedAt)}</td>
                         <td>
                           <Link
-                            to={{
-                              pathname: `/users/${paramUserId}/preferences/${up.id}`,
-                              state: up,
-                            }}
+                            to={`/users/${paramUserId}/preferences/${up.id}`}
+                            state={up}
                           >
                             <img
                               className="c-hand"

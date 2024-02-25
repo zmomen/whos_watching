@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "spectre.css";
 import "./components/Common.css";
 import Banner from "./components/layout/Banner";
@@ -9,8 +9,8 @@ import { UpdateRow } from "./components/main/UpdateRow";
 import { UserPreferences } from "./components/main/UserPreferences";
 import { NowPlayingMenu } from "./components/menu/NowPlayingMenu";
 import { SideMenu } from "./components/menu/SideMenu";
-import { getAllUsers } from "./utils/api";
 import Store from "./utils/Store";
+import { getAllUsers } from "./utils/api";
 
 const App = () => {
   const DEFAULT_USER = 3;
@@ -34,14 +34,14 @@ const App = () => {
               <NowPlayingMenu />
             </div>
             <Routes>
-              <Route path="/" element={<UserPreferences/>} exact />
-              <Route path="/users/:id" element={<UserPreferences/>} exact />
+              <Route path="/" element={<UserPreferences />} exact />
+              <Route path="/users/:id" element={<UserPreferences />} exact />
               <Route
                 path={"/users/:id/preferences/:prefId"}
-                element={UpdateRow}
+                element={<UpdateRow />}
                 exact
               />
-              <Route path="/now-playing" element={<NowPlayingPage/>} exact />
+              <Route path="/now-playing" element={<NowPlayingPage />} exact />
             </Routes>
           </div>
         </Router>

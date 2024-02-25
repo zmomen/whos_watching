@@ -20,6 +20,8 @@ type UserPrefsModelRequest struct {
 	Genre     string `json:"genre"`
 	MediaUrl  string `json:"mediaUrl"`
 	Platform  string `json:"platform"`
+	CreatedAt  string `json:"createdAt"`
+	UpdatedAt  string `json:"updatedAt"`
 }
 
 type UserModel struct {

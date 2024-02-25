@@ -1,17 +1,18 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllUsers, updateUserPref } from "../../utils/api";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../utils/Store";
+import { getAllUsers, updateUserPref } from "../../utils/api";
 
-export const UpdateRow = ({ match, location }) => {
+export const UpdateRow = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(Context);
   const [openUserSelection, setOpenUserSelection] = useState(false);
   const [users, setUsers] = useState([]);
 
-  let dataToUpdate = location.state;
-  let paramUserId = parseInt(match.params.id) || state.userId;
-  const [userPref, setUserPref] = useState(dataToUpdate ? dataToUpdate : {});
+  let location = useLocation();
+  let { id } = useParams();
+  let paramUserId = parseInt(id) || state.userId;
+  const [userPref, setUserPref] = useState(location.state ? location.state : {});
   const [changedUser, setChangedUser] = useState(paramUserId);
   const handleChange = (evt) => {
     const name = evt.target.name;
@@ -189,9 +190,8 @@ export const UpdateRow = ({ match, location }) => {
                   style={{ display: "table-cell", paddingRight: "1rem" }}
                 >
                   <div
-                    className={`${
-                      changedUser === user.id ? "selected-user" : ""
-                    } c-hand`}
+                    className={`${changedUser === user.id ? "selected-user" : ""
+                      } c-hand`}
                     onClick={() => setChangedUser(user.id)}
                   >
                     {user.name}
