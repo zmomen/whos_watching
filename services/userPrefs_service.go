@@ -69,6 +69,7 @@ func (u *UserPrefsService) AddUserPref(userId string, request models.UserPrefsMo
 			Genre:     request.Genre,
 			MediaUrl:  request.MediaUrl,
 			Platform:  request.Platform,
+			UpdatedAt: request.UpdatedAt,			
 		}
 		log.Println("User pref added!")
 	} else {

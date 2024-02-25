@@ -8,6 +8,7 @@ export const AddRow = ({ handleAdd }) => {
     mediaUrl: "",
     platform: "",
     notes: "",
+    updatedAt: new Date(),
   };
   const [rowData, setRowData] = useState(initialState);
   const [errors, setErrors] = useState(false);
