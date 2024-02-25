@@ -5,7 +5,7 @@ var config = {
 };
 
 var instance = axios.create({
-  baseURL: "http://" + process.env.REACT_APP_IPP + ":8080",
+  baseURL: "http://" + "192.168.0.224" + ":8080",
 });
 
 console.warn(process.env.REACT_APP_IPP, "iphere");

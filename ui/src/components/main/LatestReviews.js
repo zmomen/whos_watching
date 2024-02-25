@@ -14,11 +14,11 @@ function LatestReviews(props) {
   }, [])
 
   var sliderSettings = {
-    arrows: false,
+    arrows: true,
     autoplay: true,
     fade: true,
     infinite: true,
-    speed: 750,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1
   };
@@ -29,10 +29,14 @@ function LatestReviews(props) {
         <h3 className="banner">The Reviews are in!</h3>
         <Slider style={{ width: "700px" }} {...sliderSettings}>
           {latestReviews.map((review, idx) => {
-            return <li key={idx}>
-              <h5>{review.title}</h5>
-              <p>{review.notes}</p>
-            </li>
+            return (
+              <li key={idx}>
+                <h5>{review.title}</h5>
+                <p>
+                  <i>"{review.notes}"</i>
+                </p>
+              </li>
+            );
           })}
         </Slider>
       </ul>
