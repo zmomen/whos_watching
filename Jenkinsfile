@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Step') {
             steps {
-                echo 'Building..'
+                echo 'Building via Git SCM..'
             }
         }
         stage('Test Step') {
