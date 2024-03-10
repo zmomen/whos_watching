@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1
+
+##
+## Build
+##
+FROM golang:1.21-alpine as build
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+ADD controllers/ ./controllers
+ADD models/ ./models 
+ADD services/ ./services 
+ADD db/ ./db
+
+COPY main.go ./
+
+ENV GO111MODULE=on
+
+RUN go build -o /whos_watching_exec main.go
+
+##
+## Deploy
+##
+FROM gcr.io/distroless/base-debian12
+
+WORKDIR /
+
+COPY --from=build /whos_watching_exec /whos_watching_exec
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/whos_watching_exec"]

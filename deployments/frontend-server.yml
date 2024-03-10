@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: frontend-server    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: frontend-server
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: frontend-server
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: frontend-server
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+      - name: frontend-server
+        image: frontend-server
+        imagePullPolicy: Never
+        ports:
+          - name: http
+            containerPort: 80 # The port that the container exposes
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "200Mi"
+# Setup as NodePort
+
+# ---
+# apiVersion: v1                # API version
+# kind: Service                 # Type of the kubernetes resource
+# metadata:                     
+#   name: frontend-server    # Name of the kubernetes resource
+#   labels:                     # Labels that will be applied to this resource
+#     app: frontend-server
+# spec:                         
+#   type: NodePort              # The service will be exposed by opening a Port on each node and proxying it. 
+#   selector:
+#     app: frontend-server   # The service exposes Pods with label `app=frontend-server`
+#   ports:                      # Forward incoming connections on port 8080 to the target port 8080
+#   - name: http
+#     port: 80
+#     targetPort: 80
+
+# Setup as LoadBalancer
+
+---
+apiVersion: v1                # API version
+kind: Service                 # Type of the kubernetes resource
+metadata:                     
+  name: frontend-server    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: frontend-server
+spec:                         
+  type: LoadBalancer              # The service will be exposed by opening a Port on each node and proxying it. 
+  selector:
+    app: frontend-server   # The service exposes Pods with label `app=frontend-server`
+  ports:                      # Forward incoming connections on port 8080 to the target port 8080
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 31000

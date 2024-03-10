@@ -1,11 +1,11 @@
 import axios from "axios";
 
 var config = {
-  headers: { "Access-Control-Allow-Origin": "*" },
+  // headers: { "Access-Control-Allow-Origin": "*" },
 };
 
 var instance = axios.create({
-  baseURL: "http://" + process.env.REACT_APP_IPP + ":8080",
+  baseURL: "/api"
 });
 
 export function getAllUsers() {
