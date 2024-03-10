@@ -28,24 +28,6 @@ spec:
             memory: "200Mi"
 # Setup as NodePort
 
-# ---
-# apiVersion: v1                # API version
-# kind: Service                 # Type of the kubernetes resource
-# metadata:                     
-#   name: frontend-server    # Name of the kubernetes resource
-#   labels:                     # Labels that will be applied to this resource
-#     app: frontend-server
-# spec:                         
-#   type: NodePort              # The service will be exposed by opening a Port on each node and proxying it. 
-#   selector:
-#     app: frontend-server   # The service exposes Pods with label `app=frontend-server`
-#   ports:                      # Forward incoming connections on port 8080 to the target port 8080
-#   - name: http
-#     port: 80
-#     targetPort: 80
-
-# Setup as LoadBalancer
-
 ---
 apiVersion: v1                # API version
 kind: Service                 # Type of the kubernetes resource
@@ -54,11 +36,29 @@ metadata:
   labels:                     # Labels that will be applied to this resource
     app: frontend-server
 spec:                         
-  type: LoadBalancer              # The service will be exposed by opening a Port on each node and proxying it. 
+  type: NodePort              # The service will be exposed by opening a Port on each node and proxying it. 
   selector:
     app: frontend-server   # The service exposes Pods with label `app=frontend-server`
   ports:                      # Forward incoming connections on port 8080 to the target port 8080
-    - port: 80
-      targetPort: 80
-      protocol: TCP
-      nodePort: 31000
+  - name: http
+    port: 80
+    targetPort: 80
+
+# Setup as LoadBalancer
+
+# ---
+# apiVersion: v1                # API version
+# kind: Service                 # Type of the kubernetes resource
+# metadata:                     
+#   name: frontend-server    # Name of the kubernetes resource
+#   labels:                     # Labels that will be applied to this resource
+#     app: frontend-server
+# spec:                         
+#   type: LoadBalancer              # The service will be exposed by opening a Port on each node and proxying it. 
+#   selector:
+#     app: frontend-server   # The service exposes Pods with label `app=frontend-server`
+#   ports:                      # Forward incoming connections on port 8080 to the target port 8080
+#     - port: 80
+#       targetPort: 80
+#       protocol: TCP
+#       nodePort: 31000
