@@ -5,7 +5,7 @@ var config = {
 };
 
 var instance = axios.create({
-  baseURL: "http://localhost:8080"
+  baseURL: "http://" + process.env.REACT_APP_IPP + ":8080"
 });
 
 export function getAllUsers() {
