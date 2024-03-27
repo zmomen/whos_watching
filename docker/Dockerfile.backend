@@ -3,35 +3,32 @@
 ##
 ## Build
 ##
-FROM golang:1.17-alpine as build
+FROM golang:1.21-alpine as build
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
 
 ADD controllers/ ./controllers
 ADD models/ ./models 
 ADD services/ ./services 
-ADD db/db_caller.go ./db/db_caller.go
+ADD db/ ./db
 
-RUN pwd
 COPY main.go ./
 
 ENV GO111MODULE=on
 
-RUN GOARCH=amd64 go build -o /whos_watching_exec main.go
+RUN go build -o /whos_watching_exec main.go
 
 ##
 ## Deploy
 ##
-FROM gcr.io/distroless/base-debian10
+FROM gcr.io/distroless/base-debian12
 
 WORKDIR /
 
 COPY --from=build /whos_watching_exec /whos_watching_exec
-ADD db/config.json db/config.json
 
 EXPOSE 8080
 

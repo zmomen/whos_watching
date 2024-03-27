@@ -5,7 +5,6 @@ ui/build/**
 db/mysql_data
 *.sql
 
-db/config.json
 nohup.out
 
 HELP.md
