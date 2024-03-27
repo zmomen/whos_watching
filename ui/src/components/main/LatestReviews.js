@@ -24,10 +24,9 @@ function LatestReviews(props) {
   };
 
   return (
-    <div style={{ paddingBottom: "16px" }}>
-      <ul className={"menu"}>
+    <div className="reviews">
         <h3 className="banner">The Reviews are in!</h3>
-        <Slider style={{ width: "700px" }} {...sliderSettings}>
+        <Slider {...sliderSettings}>
           {latestReviews.map((review, idx) => {
             return (
               <li key={idx}>
@@ -39,7 +38,6 @@ function LatestReviews(props) {
             );
           })}
         </Slider>
-      </ul>
     </div>
   );
 }

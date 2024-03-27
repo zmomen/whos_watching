@@ -72,3 +72,10 @@
   font-size: 10pt;
   color: gray;
 }
+
+.reviews {
+  padding-bottom: 16px;
+  background-color: aqua;
+  border-style: groove;
+  width: 1050px;
+}
