@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -12,9 +11,9 @@ import (
 type Database struct{}
 
 func (d *Database) GetDb() *sql.DB {
-	var dbUser = os.Getenv("mysql_username")
-	var dbPass = os.Getenv("mysql_password")
-	var dbHost = "mysql"
+	var dbUser = "root"
+	var dbPass = "password"
+	var dbHost = "localhost"
 	var dbPort = "3306"
 	var dbName = "whos_watching"
 	var connection = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPass, dbHost, dbPort, dbName)
