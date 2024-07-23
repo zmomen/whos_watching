@@ -175,7 +175,7 @@ export const UserPreferences = () => {
           <table id="myTable" className="table table-hover">
             <thead>
               <tr>
-                <th onClick={() => sortTable(0)}>Title {sortDirection(sortDir)}</th>
+                <th onClick={() => sortTable(0)}>Title</th>
                 <th onClick={() => sortTable(1)}>Type</th>
                 <th onClick={() => sortTable(2)}>Genre</th>
                 <th onClick={() => sortTable(3)}>Platform</th>
