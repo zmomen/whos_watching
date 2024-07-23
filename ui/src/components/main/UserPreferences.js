@@ -14,6 +14,7 @@ export const UserPreferences = () => {
   const [userPrefs, setUserPrefs] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [isAdding, setIsAdding] = useState(false);
+
   useEffect(() => {
     //get user name
     api
@@ -51,7 +52,7 @@ export const UserPreferences = () => {
   };
 
 
-  function sortTable(n) {
+  function sortTable(col, isDate = false) {
     var table,
       rows,
       switching,
@@ -78,18 +79,30 @@ export const UserPreferences = () => {
         shouldSwitch = false;
         /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
+        x = rows[i].getElementsByTagName("TD")[col];
+        y = rows[i + 1].getElementsByTagName("TD")[col];
         /*check if the two rows should switch place,
       based on the direction, asc or desc:*/
         if (dir === "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          if (isDate) {
+            if (new Date(x.innerHTML.toLowerCase()) > new Date(y.innerHTML.toLowerCase())) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
           }
         } else if (dir === "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          if (isDate) {
+            if (new Date(x.innerHTML.toLowerCase()) < new Date(y.innerHTML.toLowerCase())) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
@@ -162,12 +175,12 @@ export const UserPreferences = () => {
           <table id="myTable" className="table table-hover">
             <thead>
               <tr>
-                <th onClick={() => sortTable(0)}>Title</th>
+                <th onClick={() => sortTable(0)}>Title {sortDirection(sortDir)}</th>
                 <th onClick={() => sortTable(1)}>Type</th>
                 <th onClick={() => sortTable(2)}>Genre</th>
                 <th onClick={() => sortTable(3)}>Platform</th>
-                <th onClick={() => sortTable(3)}>Reviews / Notes</th>
-                <th onClick={() => sortTable(5)}>Updated</th>
+                <th onClick={() => sortTable(4)}>Reviews / Notes</th>
+                <th onClick={() => sortTable(5, true)}>Updated</th>
                 <th>Edit</th>
                 <th>Remove</th>
               </tr>
