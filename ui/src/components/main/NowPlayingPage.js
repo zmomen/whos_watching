@@ -36,6 +36,7 @@ export const NowPlayingPage = () => {
         <div className="form-group">
           <select
             className="form-select"
+            style={{height: "500px"}}
             onChange={(e) => setUpdatedNowPlaying(e.target.value)}
             multiple
           >
