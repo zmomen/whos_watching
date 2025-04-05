@@ -3,6 +3,7 @@ package service
 import (
 	"database/sql"
 	"log"
+	"strconv"
 	models "whos_watching/models"
 )
 
@@ -68,8 +69,9 @@ func (m *MediaService) DeleteMedia(mediaId string) {
 
 func (m *MediaService) UpdateMedia(request models.UserPrefsModelRequest, mediaId string) int64 {
 	UpdateQry := m.constructUpdateStmtWithRequestStatus(request.Status)
+	intMediaID, _ := strconv.Atoi(mediaId)
 	res, err := m.database.Exec(UpdateQry, request.Title, request.MediaType, request.Genre, 
-		request.MediaUrl, request.Platform, mediaId)
+		request.MediaUrl, request.Platform, intMediaID)
 	if err != nil {
 		log.Panic(err.Error())
 		return -1
