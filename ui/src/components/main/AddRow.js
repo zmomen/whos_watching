@@ -126,7 +126,7 @@ export const AddRow = ({ handleAdd }) => {
         </tbody>
       </table>
       {errors && (
-        <div style={{ color: "red" }}>
+        <div className="error-text">
           Error: title, media, or genre cannot be empty
         </div>
       )}

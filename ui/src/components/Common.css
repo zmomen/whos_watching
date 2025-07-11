@@ -79,3 +79,86 @@
   border-style: groove;
   width: 1063px;
 }
+
+.reviews-title {
+  font-family: 'Raleway', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.footer-bar {
+  border-radius: 0.1rem;
+  background-color: var(--footer-bg, #4c4c4e);
+  text-align: right;
+  padding: 20px;
+  margin-top: 200px;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-text {
+  color: white;
+}
+
+.banner-container {
+  height: 75px;
+}
+
+.banner-title {
+  display: flex;
+  justify-content: center;
+  font-family: 'Raleway', Arial, sans-serif;
+  font-size: x-large;
+}
+
+.error-margin {
+  margin-top: 20px;
+}
+
+.table-div {
+  display: table;
+}
+
+.table-row-div {
+  display: table-row;
+}
+
+.table-cell-div {
+  display: table-cell;
+}
+
+.input-wide {
+  width: 300px;
+}
+
+.pr-1 {
+  padding-right: 1rem;
+}
+
+.pr-quarter {
+  padding-right: .25rem;
+}
+
+.space-between-center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-tall {
+  height: 500px;
+}
+
+.slider-wide {
+  width: 1048px;
+}
+
+.error-text {
+  color: red;
+}

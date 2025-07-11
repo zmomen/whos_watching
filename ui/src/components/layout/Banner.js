@@ -3,16 +3,9 @@ import "../Common.css";
 
 function Banner(props) {
   return (
-    <div style={{ height: "75px" }}>
+    <div className="banner-container">
       <ul className={"menu"}>
-        <li
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            fontFamily: "fantasy",
-            fontSize: "x-large",
-          }}
-        >
+        <li className="banner-title">
           WHO'S WATCHING
         </li>
       </ul>

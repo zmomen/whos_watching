@@ -25,8 +25,8 @@ function LatestReviews(props) {
 
   return (
     <div className="reviews">
-        <h3 className="banner">The Reviews are in!</h3>
-        <Slider style={{ width: "1048px" }} {...sliderSettings}>
+        <h3 className="reviews-title">The Reviews are in!</h3>
+        <Slider className="slider-wide" {...sliderSettings}>
           {latestReviews.map((review, idx) => {
             return (
               <li key={idx}>

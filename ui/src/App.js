@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "spectre.css";
 import "./components/Common.css";
 import Banner from "./components/layout/Banner";
@@ -12,21 +12,28 @@ import { SideMenu } from "./components/menu/SideMenu";
 import Store from "./utils/Store";
 import { getAllUsers } from "./utils/api";
 
+const DEFAULT_USER = 3;
+
 const App = () => {
-  const DEFAULT_USER = 3;
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     getAllUsers()
       .then(({ data }) => {
         setUsers(data);
       })
-      .catch((err) => console.warn("error", err));
+      .catch((err) => {
+        setError("Failed to fetch users");
+        console.warn("error", err);
+      });
   }, []);
+
   return (
     <Store>
-      <div className={"container grid-xl black"}>
-        <Banner />
-        <Router>
+      <Router>
+        <div className="container grid-xl black">
+          <Banner />
           <div className="d-flex">
             <div>
               <SideMenu users={users} currentUser={DEFAULT_USER} />
@@ -34,19 +41,20 @@ const App = () => {
               <NowPlayingMenu />
             </div>
             <Routes>
-              <Route path="/" element={<UserPreferences />} exact />
-              <Route path="/users/:id" element={<UserPreferences />} exact />
-              <Route
-                path={"/users/:id/preferences/:prefId"}
-                element={<UpdateRow />}
-                exact
-              />
-              <Route path="/now-playing" element={<NowPlayingPage />} exact />
+              <Route path="/" element={<UserPreferences />} />
+              <Route path="/users/:id" element={<UserPreferences />} />
+              <Route path="/users/:id/preferences/:prefId" element={<UpdateRow />} />
+              <Route path="/now-playing" element={<NowPlayingPage />} />
             </Routes>
           </div>
-        </Router>
-      </div>
-      <Footer />
+          {error && (
+            <div className="toast toast-error error-margin">
+              {error}
+            </div>
+          )}
+          <Footer />
+        </div>
+      </Router>
     </Store>
   );
 };

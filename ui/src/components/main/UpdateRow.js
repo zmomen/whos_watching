@@ -50,45 +50,45 @@ export const UpdateRow = () => {
               <u>Edit: </u>
             </b>
           </p>
-          <div style={{ display: "table" }}>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+          <div className="table-div">
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Title</b>
               </div>
               <input
                 name="title"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.title}
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Media</b>
               </div>
               <input
                 name="mediaType"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.mediaType}
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Genre</b>
               </div>
               <input
                 name="genre"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.genre}
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Status</b>
               </div>
-              <span style={{ paddingRight: ".25rem" }}>
+              <span className="pr-quarter">
                 <input
                   type="radio"
                   name="status"
@@ -97,8 +97,8 @@ export const UpdateRow = () => {
                   onChange={handleChange}
                 />
               </span>
-              <span style={{ paddingRight: ".25rem" }}>Active</span>
-              <span style={{ paddingRight: ".25rem" }}>
+              <span className="pr-quarter">Active</span>
+              <span className="pr-quarter">
                 <input
                   type="radio"
                   name="status"
@@ -107,47 +107,47 @@ export const UpdateRow = () => {
                   defaultChecked={userPref.status === "complete"}
                 />
               </span>
-              <span style={{ paddingRight: ".25rem" }}>Complete</span>
+              <span className="pr-quarter">Complete</span>
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>URL</b>
               </div>
               <input
                 name="mediaUrl"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.mediaUrl}
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Platform</b>
               </div>
               <input
                 name="platform"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.platform}
                 onChange={handleChange}
               />
             </div>
-            <div style={{ display: "table-row" }}>
-              <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+            <div className="table-row-div">
+              <div className="table-cell-div pr-1">
                 <b>Reviews / Notes</b>
               </div>
               <input
                 name="notes"
-                style={{ display: "table-cell", width: "300px" }}
+                className="table-cell-div input-wide"
                 defaultValue={userPref.notes}
                 onChange={handleChange}
               />
             </div>
           </div>
-          <div style={{ display: "table-row" }}>
-            <div style={{ display: "table-cell", paddingRight: "1rem" }}>
+          <div className="table-row-div">
+            <div className="table-cell-div pr-1">
               <b>Priority</b>
             </div>
-            <span style={{ paddingRight: ".25rem" }}>
+            <span className="pr-quarter">
               <input
                 type="radio"
                 name="priority"
@@ -156,8 +156,8 @@ export const UpdateRow = () => {
                 onChange={handleChange}
               />
             </span>
-            <span style={{ paddingRight: ".25rem" }}>High</span>
-            <span style={{ paddingRight: ".25rem" }}>
+            <span className="pr-quarter">High</span>
+            <span className="pr-quarter">
               <input
                 type="radio"
                 name="priority"
@@ -166,12 +166,11 @@ export const UpdateRow = () => {
                 defaultChecked={userPref.priority === "low"}
               />
             </span>
-            <span style={{ paddingRight: ".25rem" }}>Low</span>
+            <span className="pr-quarter">Low</span>
           </div>
           <br />
           <div
-            className="dropdown"
-            style={{ display: "table-row" }}
+            className="dropdown table-row-div"
             onClick={handleChangeUser}
           >
             <b className="c-hand">
@@ -186,12 +185,10 @@ export const UpdateRow = () => {
               return (
                 <div
                   key={idx}
-                  className="menu-item"
-                  style={{ display: "table-cell", paddingRight: "1rem" }}
+                  className="menu-item table-cell-div pr-1"
                 >
                   <div
-                    className={`${changedUser === user.id ? "selected-user" : ""
-                      } c-hand`}
+                    className={`${changedUser === user.id ? "selected-user" : ""} c-hand`}
                     onClick={() => setChangedUser(user.id)}
                   >
                     {user.name}

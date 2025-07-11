@@ -142,8 +142,7 @@ export const UserPreferences = () => {
             <LatestReviews />
           </div>
           <div
-            className="d-flex"
-            style={{ justifyContent: "space-between", alignItems: "center" }}
+            className="d-flex space-between-center"
           >
             <div>
               Playlist for <b>{userInfo && userInfo.name}</b>
@@ -239,8 +238,7 @@ export const UserPreferences = () => {
         <ul className={"menu"}>
           <li>
             <div
-              className="d-flex"
-              style={{ justifyContent: "space-between", alignItems: "center" }}
+              className="d-flex space-between-center"
             >
               <div className="text-success">Completed Shows</div>
             </div>
